@@ -1,0 +1,5 @@
+{"level":"INFO","time":"2025-09-22T15:33:51.221+0800","caller":"personal_blog/main.go:11","msg":"1234"}
+{"level":"INFO","time":"2025-09-22T15:33:51.221+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"ERROR","time":"2025-09-23T18:30:54.040+0800","caller":"core/gorm.go:27","msg":"Failed to connect to MySQL:","error":"dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it."}
+{"level":"INFO","time":"2025-09-23T18:43:02.727+0800","caller":"core/server.go:19","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-09-23T18:43:02.727+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
