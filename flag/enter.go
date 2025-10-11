@@ -25,7 +25,7 @@ import (
 var (
 	sqlFlag = &cli.BoolFlag{
 		Name:  "sql",
-		Usage: "Initializes the structure of the MySQL database table.",
+		Usage: "Initializes the structure of the MySQL entity table.",
 	}
 	sqlExportFlag = &cli.BoolFlag{
 		Name:  "sql-export",
@@ -49,7 +49,7 @@ var (
 	}
 	adminFlag = &cli.BoolFlag{
 		Name:  "admin",
-		Usage: "Creates an administrator using the name, email and address specified in the config.yaml file.",
+		Usage: "Creates an administrator using the name, email and address specified in the configs.yaml file.",
 	}
 )
 

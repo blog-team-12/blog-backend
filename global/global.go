@@ -6,7 +6,7 @@ import (
 	"github.com/songzhibin97/gkit/cache/local_cache"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
-	"personal_blog/model/config"
+	"personal_blog/internal/model/config"
 )
 
 var (
