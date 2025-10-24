@@ -1,6 +1,7 @@
 package interfaces
 
 import (
+	"context"
 	"personal_blog/internal/model/entity"
 	"time"
 )
@@ -8,24 +9,24 @@ import (
 // JWTRepository JWT仓储接口
 type JWTRepository interface {
 	// Token黑名单管理
-	AddToBlacklist(token string, expiry time.Time) error
-	IsTokenBlacklisted(token string) (bool, error)
-	CleanExpiredTokens() error
+	AddToBlacklist(ctx context.Context, token string, expiry time.Time) error
+	IsTokenBlacklisted(ctx context.Context, token string) (bool, error)
+	CleanExpiredTokens(ctx context.Context) error
 
 	// 用户Token记录
-	SaveUserToken(userID uint, token string, expiry time.Time) error
-	GetUserTokens(userID uint) ([]*entity.UserToken, error)
-	RevokeUserToken(userID uint, token string) error
-	RevokeAllUserTokens(userID uint) error
+	SaveUserToken(ctx context.Context, userID uint, token string, expiry time.Time) error
+	GetUserTokens(ctx context.Context, userID uint) ([]*entity.UserToken, error)
+	RevokeUserToken(ctx context.Context, userID uint, token string) error
+	RevokeAllUserTokens(ctx context.Context, userID uint) error
 
 	// Token验证和刷新
-	ValidateToken(token string) (bool, error)
-	GetTokenInfo(token string) (*entity.TokenInfo, error)
-	UpdateTokenExpiry(token string, newExpiry time.Time) error
+	ValidateToken(ctx context.Context, token string) (bool, error)
+	GetTokenInfo(ctx context.Context, token string) (*entity.TokenInfo, error)
+	UpdateTokenExpiry(ctx context.Context, token string, newExpiry time.Time) error
 
 	// 兼容现有Service层的方法
-	CreateJwtBlacklist(jwtList *entity.JwtBlacklist) error
-	IsJwtInBlacklist(jwt string) (bool, error)
-	GetAllJwtBlacklist() ([]string, error)
-	GetUserByID(id uint) (*entity.User, error)
+	CreateJwtBlacklist(ctx context.Context, jwtList *entity.JwtBlacklist) error
+	IsJwtInBlacklist(ctx context.Context, jwt string) (bool, error)
+	GetAllJwtBlacklist(ctx context.Context) ([]string, error)
+	GetUserByID(ctx context.Context, id uint) (*entity.User, error)
 }

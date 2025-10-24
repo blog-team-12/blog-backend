@@ -5,13 +5,17 @@ import (
 )
 
 type Supplier interface {
-	GetRefreshTokenApi() *RefreshTokenApi
+	GetRefreshTokenCtrl() *RefreshTokenCtrl
+	GetBaseCtrl() *BaseCtrl
 }
 
 func SetUp(service *service.Group) Supplier {
 	cs := &controllerSupplier{}
-	cs.refreshTokenApi = &RefreshTokenApi{
+	cs.refreshTokenCtrl = &RefreshTokenCtrl{
 		jwtService: service.SystemServiceSupplier.GetJWTService(),
+	}
+	cs.baseCtrl = &BaseCtrl{
+		baseService: service.SystemServiceSupplier.GetBaseService(),
 	}
 	return cs
 }

@@ -1,0 +1,5 @@
+- 1.Repository层 ：负责所有数据库查询逻辑，包括复杂的JOIN查询
+- 2.Service层 ：只负责业务逻辑编排，调用Repository方法，不直接操作数据库，并且我这里没有对service进行接口处理。
+- 3.分离关注点 ：数据访问逻辑与业务逻辑完全分离
+- 4.Controller层 ：负责接收用户请求，调用Service方法，返回结果给用户
+- 5.model层 ：负责数据结构定义，包括consts、DTO，entity是数据库表的映射,项目中的结构体,最好都定义在model中。若我项目中已经有对应的model了，就优先使用model中的结构体。

@@ -9,11 +9,10 @@ type refreshToken struct{}
 
 func (r *refreshToken) InitRefreshTokenRouter(router *gin.RouterGroup) {
 	refreshTokenRouter := router.Group("refreshToken")
-	refreshTokenApi := controller.ApiGroupApp.SystemApiGroup.GetRefreshTokenApi()
+	refreshTokenApi := controller.ApiGroupApp.SystemApiGroup.GetRefreshTokenCtrl()
 	{
 		// 刷新Api
 		refreshTokenRouter.GET("", refreshTokenApi.RefreshToken)
-		//
 	}
 
 }

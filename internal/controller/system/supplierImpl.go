@@ -1,9 +1,13 @@
 package system
 
 type controllerSupplier struct {
-	refreshTokenApi *RefreshTokenApi
+	refreshTokenCtrl *RefreshTokenCtrl
+	baseCtrl         *BaseCtrl
 }
 
-func (c *controllerSupplier) GetRefreshTokenApi() *RefreshTokenApi {
-	return c.refreshTokenApi
+func (c *controllerSupplier) GetRefreshTokenCtrl() *RefreshTokenCtrl {
+	return c.refreshTokenCtrl
+}
+func (c *controllerSupplier) GetBaseCtrl() *BaseCtrl {
+	return c.baseCtrl
 }

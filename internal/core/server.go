@@ -1,9 +1,10 @@
 package core
 
 import (
-	"go.uber.org/zap"
 	"personal_blog/global"
 	"personal_blog/internal/router"
+
+	"go.uber.org/zap"
 )
 
 type server interface {

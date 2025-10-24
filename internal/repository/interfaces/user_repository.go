@@ -1,24 +1,27 @@
 package interfaces
 
-import "personal_blog/internal/model/entity"
+import (
+	"context"
+	"personal_blog/internal/model/entity"
+)
 
 // UserRepository 用户仓储接口
 type UserRepository interface {
 	// 基础CRUD操作
-	GetByID(id uint) (*entity.User, error)
-	GetByUsername(username string) (*entity.User, error)
-	GetByEmail(email string) (*entity.User, error)
-	Create(user *entity.User) error
-	Update(user *entity.User) error
-	Delete(id uint) error
+	GetByID(ctx context.Context, id uint) (*entity.User, error)
+	GetByUsername(ctx context.Context, username string) (*entity.User, error)
+	GetByEmail(ctx context.Context, email string) (*entity.User, error)
+	Create(ctx context.Context, user *entity.User) error
+	Update(ctx context.Context, user *entity.User) error
+	Delete(ctx context.Context, id uint) error
 
 	// 业务相关查询
-	GetUserList(page, pageSize int) ([]*entity.User, int64, error)
-	ExistsByUsername(username string) (bool, error)
-	ExistsByEmail(email string) (bool, error)
-	GetActiveUsers() ([]*entity.User, error)
+	GetUserList(ctx context.Context, page, pageSize int) ([]*entity.User, int64, error)
+	ExistsByUsername(ctx context.Context, username string) (bool, error)
+	ExistsByEmail(ctx context.Context, email string) (bool, error)
+	GetActiveUsers(ctx context.Context) ([]*entity.User, error)
 
 	// 认证相关
-	ValidateUser(username, password string) (*entity.User, error)
-	UpdateLastLogin(id uint) error
+	ValidateUser(ctx context.Context, username, password string) (*entity.User, error)
+	UpdateLastLogin(ctx context.Context, id uint) error
 }

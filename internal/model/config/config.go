@@ -34,13 +34,13 @@ func NewConfig() *Config {
 	_mysql := &Mysql{
 		Host:         viper.GetString("mysql.host"),
 		Port:         viper.GetInt("mysql.port"),
-		Config:       viper.GetString("mysql.configs"),
-		DBName:       viper.GetString("mysql.dbName"),
+		Config:       viper.GetString("mysql.config"),
+		DBName:       viper.GetString("mysql.db_name"),
 		Username:     viper.GetString("mysql.username"),
 		Password:     viper.GetString("mysql.password"),
-		MaxIdleConns: viper.GetInt("mysql.maxIdleConns"),
-		MaxOpenConns: viper.GetInt("mysql.maxOpenConns"),
-		LogMode:      viper.GetString("mysql.logMode"),
+		MaxIdleConns: viper.GetInt("mysql.max_idle_conns"),
+		MaxOpenConns: viper.GetInt("mysql.max_open_conns"),
+		LogMode:      viper.GetString("mysql.log_mode"),
 	}
 	// 系统服务配置初始化
 	_system := &System{
