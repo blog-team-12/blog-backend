@@ -3,7 +3,6 @@ package request
 import (
 	"github.com/gofrs/uuid"
 	jwt "github.com/golang-jwt/jwt/v4"
-	"personal_blog/internal/model/consts"
 )
 
 /*
@@ -14,9 +13,9 @@ import (
 
 // BaseClaims 结构体用于存储基本的用户信息，作为JWT的Claim部分
 type BaseClaims struct {
-	UserID uint           // 用户ID，标识用户唯一性
-	UUID   uuid.UUID      // 用户的UUID，唯一标识用户
-	RoleID consts.RoleID // 用户角色ID，表示用户的权限级别
+	UserID uint      // 用户ID，标识用户唯一性
+	UUID   uuid.UUID // 用户的UUID，唯一标识用户
+	// 注意：移除了RoleID字段，现在通过权限服务动态获取用户角色
 }
 
 // JwtCustomClaims 结构体用于存储JWT的自定义Claims，继承自BaseClaims，并包含标准的JWT注册信息

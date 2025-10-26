@@ -22,9 +22,11 @@ system:
   port: 8080 # 服务对外暴露的端口号
   env: release # 应用运行环境（release=生产环境；dev=开发环境；test=测试环境等）
   router_prefix: controller # API 接口的统一前缀（所有接口路径会以 /controller 开头）
-  use_multipoint: true # 是否启用“多点”能力（如多客户端连接、多节点通信等场景）
+  use_multipoint: true # 是否启用"多点"能力（如多客户端连接、多节点通信等场景）
   sessions_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx # Session 加密/签名的密钥（保障会话安全）
   oss_type: local # 对象存储（OSS）类型（local=本地存储；若为 ali/ tencent 则对应云存储）
+  default_role_code: "user" # 新用户注册时的默认角色代码
+  default_role_name: "普通用户" # 默认角色的显示名称
 zap:
   level: info #  日志级别为info：记录应用正常运行信息（如服务启动、接口请求成功），不包含debug调试信息和error错误信息，平衡日志详细度与性能
   filename: log/go_blog.log # 日志文件存储路径及名称：日志会写入项目根目录下的log文件夹，文件名为go_blog.log，便于统一管理和查找
@@ -57,12 +59,35 @@ captcha:
 email:
   host: smtp.qq.com          # SMTP 服务器地址
   port: 465                  # SMTP 服务器端口号
-  from: xxx@qq.com           # 发件人邮箱地址
-  nickname: 发件人昵称        # 发件人显示名称
-  secret: xxxxxxxxxxxxxxxx   # 邮箱授权码或密码
-  is_ssl: true              # 是否使用SSL加密连接
+  from: w13839575053@qq.com  # 发件人邮箱地址
+  nickname: 十二         # 发件人显示名称
+  secret: zycclubrhfncdfid   # 邮箱授权码或密码
+  is_ssl: true               # 是否使用SSL加密连接
 
 # 高德地图API配置
 gaode:
   enable: false                           # 是否启用高德地图功能
   key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   # 高德地图API密钥
+
+# 个人网站的配置
+website:
+  logo: ""                                    # 网站小图标/Logo，用于浏览器标签页显示
+  full_logo: ""                               # 网站完整Logo，用于页面头部显示
+  title: 十二的个人博客                  # 网站标题，显示在浏览器标题栏
+  slogan: 博客标题                             # 网站中文标语/口号
+  slogan_en: Blog Title                       # 网站英文标语/口号
+  description: 博客描述                        # 网站描述，用于SEO和页面介绍
+  version: 1.0.0                             # 网站版本号
+  created_at: "2025-1-15"                    # 网站创建日期
+  icp_filing: icp备案号                       # ICP备案号，中国大陆网站必需
+  public_security_filing: 公安备案号            # 公安备案号，中国大陆网站必需
+  bilibili_url: https://space.bilibili.com/xxx  # B站个人主页链接
+  gitee_url: https://gitee.com/xxx           # Gitee个人主页链接
+  github_url: https://github.com/xxx/        # GitHub个人主页链接
+  blog_url: https://blog.xxx.com             # 个人博客网站链接
+  name: 十二                                  # 博主昵称/姓名
+  job: 学生                                   # 博主职业/工作
+  address: 很神秘的哦                               # 博主所在地址
+  email: w13839575053@qq.com                 # 博主联系邮箱
+  qq_image: ""                               # QQ二维码图片路径
+  wechat_image: ""                           # 微信二维码图片路径

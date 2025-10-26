@@ -85,14 +85,27 @@ func (r *roleRepository) GetActiveRoles(ctx context.Context) ([]*entity.Role, er
 
 // 角色菜单关系管理
 
-func (r *roleRepository) AssignMenuToRole(ctx context.Context, roleID, menuID uint) error {
-	return r.db.WithContext(ctx).Exec("INSERT IGNORE INTO role_menus (role_id, menu_id) VALUES (?, ?)", roleID, menuID).Error
+func (r *roleRepository) AssignMenuToRole(
+	ctx context.Context,
+	roleID,
+	menuID uint,
+) error {
+	return r.db.WithContext(ctx).
+		Exec("INSERT IGNORE INTO role_menus (role_id, menu_id) VALUES (?, ?)", roleID, menuID).
+		Error
 }
-func (r *roleRepository) RemoveMenuFromRole(ctx context.Context, roleID, menuID uint) error {
+func (r *roleRepository) RemoveMenuFromRole(
+	ctx context.Context,
+	roleID,
+	menuID uint,
+) error {
 	return r.db.WithContext(ctx).Exec("DELETE FROM role_menus WHERE role_id = ? AND menu_id = ?", roleID, menuID).Error
 }
 
-func (r *roleRepository) GetRoleMenus(ctx context.Context, roleID uint) ([]*entity.Menu, error) {
+func (r *roleRepository) GetRoleMenus(
+	ctx context.Context,
+	roleID uint,
+) ([]*entity.Menu, error) {
 	var menus []*entity.Menu
 	err := r.db.WithContext(ctx).
 		Table("menus").
@@ -134,7 +147,11 @@ func (r *roleRepository) GetUserRoles(ctx context.Context, userID uint) ([]*enti
 
 // 用户角色关系管理
 
-func (r *roleRepository) AssignRoleToUser(ctx context.Context, userID, roleID uint) error {
+func (r *roleRepository) AssignRoleToUser(
+	ctx context.Context,
+	userID,
+	roleID uint,
+) error {
 	userRole := &entity.UserRole{
 		UserID: userID,
 		RoleID: roleID,
@@ -142,7 +159,11 @@ func (r *roleRepository) AssignRoleToUser(ctx context.Context, userID, roleID ui
 	return r.db.WithContext(ctx).Create(userRole).Error
 }
 
-func (r *roleRepository) RemoveRoleFromUser(ctx context.Context, userID, roleID uint) error {
+func (r *roleRepository) RemoveRoleFromUser(
+	ctx context.Context,
+	userID,
+	roleID uint,
+) error {
 	return r.db.WithContext(ctx).Where("user_id = ? AND role_id = ?", userID, roleID).Delete(&entity.UserRole{}).Error
 }
 

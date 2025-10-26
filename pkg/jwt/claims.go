@@ -5,7 +5,6 @@ import (
 	"github.com/gofrs/uuid"
 	"go.uber.org/zap"
 	"personal_blog/global"
-	"personal_blog/internal/model/consts"
 	"personal_blog/internal/model/dto/request"
 )
 
@@ -61,24 +60,8 @@ func GetUUID(c *gin.Context) uuid.UUID {
 	}
 }
 
-// GetRoleID 从Gin的Context中获取JWT解析出来的用户角色ID
-func GetRoleID(c *gin.Context) consts.RoleID {
-	// 首先尝试从Context中获取"claims"
-	if claims, exists := c.Get("claims"); !exists {
-		// 如果不存在，则重新解析Access Token
-		if cl, err := GetClaims(c); err != nil {
-			// 如果解析失败，返回0
-			return 0
-		} else {
-			// 返回解析出来的角色ID
-			return cl.RoleID
-		}
-	} else {
-		// 如果已存在claims，则直接返回角色ID
-		waitUse := claims.(*request.JwtCustomClaims)
-		return waitUse.RoleID
-	}
-}
+// 注意：GetRoleID函数已移除，因为JWT中不再包含RoleID字段
+// 现在应该通过权限服务动态获取用户角色信息
 
 // GetClaims 从Gin的Context中解析并获取JWT的Claims
 func GetClaims(c *gin.Context) (*request.JwtCustomClaims, error) {

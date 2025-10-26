@@ -14,6 +14,7 @@ type Config struct {
 	Captcha Captcha `json:"captcha" yaml:"captcha"` // 验证码配置
 	Email   Email   `json:"email" yaml:"email"`     // 邮件发送配置
 	Gaode   Gaode   `json:"gaode" yaml:"gaode"`     // 高德地图API配置
+	Website Website `json:"website" yaml:"website"` // 个人网站配置
 }
 
 func NewConfig() *Config {
@@ -51,6 +52,10 @@ func NewConfig() *Config {
 		UseMultipoint:  viper.GetBool("system.useMultipoint"),
 		SessionsSecret: viper.GetString("system.sessionsSecret"),
 		OssType:        viper.GetString("system.ossType"),
+		
+		// 角色配置
+		DefaultRoleCode: viper.GetString("system.default_role_code"),
+		DefaultRoleName: viper.GetString("system.default_role_name"),
 	}
 	// 日志配置初始化
 	_zap := &Zap{
@@ -96,6 +101,29 @@ func NewConfig() *Config {
 		Enable: viper.GetBool("gaode.enable"),
 		Key:    viper.GetString("gaode.key"),
 	}
+	// 个人网站配置初始化
+	_website := &Website{
+		Logo:                 viper.GetString("website.logo"),
+		FullLogo:             viper.GetString("website.full_logo"),
+		Title:                viper.GetString("website.title"),
+		Slogan:               viper.GetString("website.slogan"),
+		SloganEn:             viper.GetString("website.slogan_en"),
+		Description:          viper.GetString("website.description"),
+		Version:              viper.GetString("website.version"),
+		CreatedAt:            viper.GetString("website.created_at"),
+		IcpFiling:            viper.GetString("website.icp_filing"),
+		PublicSecurityFiling: viper.GetString("website.public_security_filing"),
+		BilibiliUrl:          viper.GetString("website.bilibili_url"),
+		GiteeUrl:             viper.GetString("website.gitee_url"),
+		GithubUrl:            viper.GetString("website.github_url"),
+		BlogUrl:              viper.GetString("website.blog_url"),
+		Name:                 viper.GetString("website.name"),
+		Job:                  viper.GetString("website.job"),
+		Address:              viper.GetString("website.address"),
+		Email:                viper.GetString("website.email"),
+		QqImage:              viper.GetString("website.qq_image"),
+		WechatImage:          viper.GetString("website.wechat_image"),
+	}
 
 	return &Config{
 		ES:      *_es,
@@ -108,5 +136,6 @@ func NewConfig() *Config {
 		Captcha: *_captcha,
 		Email:   *_email,
 		Gaode:   *_gaode,
+		Website: *_website,
 	}
 }

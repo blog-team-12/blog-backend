@@ -6,6 +6,7 @@ type serviceSupplier struct {
 	jwtService        *JWTService
 	permissionService *PermissionService
 	baseService       *BaseService
+	userService       *UserService
 }
 
 func (s *serviceSupplier) GetEsService() *EsService {
@@ -19,4 +20,7 @@ func (s *serviceSupplier) GetPermissionService() *PermissionService {
 }
 func (s *serviceSupplier) GetBaseService() *BaseService {
 	return s.baseService
+}
+func (s *serviceSupplier) GetUserService() *UserService {
+	return s.userService
 }

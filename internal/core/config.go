@@ -114,6 +114,7 @@ func InitConfig(path string) {
 	_ = viper.BindEnv("website.bilibili_url", "WEBSITE_BILIBILI_URL")
 	_ = viper.BindEnv("website.gitee_url", "WEBSITE_GITEE_URL")
 	_ = viper.BindEnv("website.github_url", "WEBSITE_GITHUB_URL")
+	_ = viper.BindEnv("website.blog_url", "WEBSITE_BLOG_URL")
 	_ = viper.BindEnv("website.name", "WEBSITE_NAME")
 	_ = viper.BindEnv("website.job", "WEBSITE_JOB")
 	_ = viper.BindEnv("website.address", "WEBSITE_ADDRESS")

@@ -15,6 +15,10 @@ type System struct {
 	UseMultipoint  bool   `json:"use_multipoint" yaml:"use_multipoint"`   // 是否启用多点登录拦截，防止同一账户在多个地方同时登录
 	SessionsSecret string `json:"sessions_secret" yaml:"sessions_secret"` // 用于加密会话的密钥，确保会话数据的安全性
 	OssType        string `json:"oss_type" yaml:"oss_type"`               // 对应的对象存储服务类型，如 "local" 或 "qiniu"
+	
+	// 角色配置相关
+	DefaultRoleCode string `json:"default_role_code" yaml:"default_role_code"` // 新用户注册时的默认角色代码，如 "user"
+	DefaultRoleName string `json:"default_role_name" yaml:"default_role_name"` // 默认角色的显示名称，用于日志和错误提示
 }
 
 // Addr 服务器监听地址（主机:端口号）

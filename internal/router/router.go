@@ -5,6 +5,7 @@ import (
 	"personal_blog/internal/middleware"
 	"personal_blog/internal/router/system"
 	"personal_blog/internal/service"
+	"time"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -26,16 +27,20 @@ func InitRouter() *gin.Engine {
 	var store = cookie.NewStore([]byte(global.Config.System.SessionsSecret))
 	Router.Use(sessions.Sessions("session", store))
 	// 添加超时中间件
-	Router.Use(middleware.TimeoutMiddleware(30)) // 30秒请求超时
+	Router.Use(middleware.TimeoutMiddleware(30 * time.Second)) // 30秒请求超时
 
 	systemRouter := GroupApp.System
-	// 公共路由 - 不需要认证
+
 	PublicGroup := Router.Group("")
 	{
 		// 刷新Token路由
 		systemRouter.InitRefreshTokenRouter(PublicGroup)
-		systemRouter
+		// 基础登录服务 - 获取验证码
+		systemRouter.InitBaseRouter(PublicGroup)
+		// 用户路由
+		systemRouter.InitUserRouter(PublicGroup)
 		// todo 登录、注册、健康检测
+
 	}
 
 	// 系统管理路由 - 需要JWT认证与权限管理

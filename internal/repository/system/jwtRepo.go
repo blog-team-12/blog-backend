@@ -30,7 +30,10 @@ func (r *JWTGormRepository) AddToBlacklist(ctx context.Context, token string, ex
 }
 
 // IsTokenBlacklisted 检查token是否在黑名单中
-func (r *JWTGormRepository) IsTokenBlacklisted(ctx context.Context, token string) (bool, error) {
+func (r *JWTGormRepository) IsTokenBlacklisted(
+	ctx context.Context,
+	token string,
+) (bool, error) {
 	var count int64
 	err := r.db.WithContext(ctx).Model(&entity.TokenBlacklist{}).
 		Where("token = ? AND expires_at > ?", token, time.Now()).
@@ -44,7 +47,12 @@ func (r *JWTGormRepository) CleanExpiredTokens(ctx context.Context) error {
 }
 
 // SaveUserToken 保存用户token记录
-func (r *JWTGormRepository) SaveUserToken(ctx context.Context, userID uint, token string, expiry time.Time) error {
+func (r *JWTGormRepository) SaveUserToken(
+	ctx context.Context,
+	userID uint,
+	token string,
+	expiry time.Time,
+) error {
 	userToken := &entity.UserToken{
 		UserID:    userID,
 		Token:     token,
@@ -56,7 +64,10 @@ func (r *JWTGormRepository) SaveUserToken(ctx context.Context, userID uint, toke
 }
 
 // GetUserTokens 获取用户的所有token
-func (r *JWTGormRepository) GetUserTokens(ctx context.Context, userID uint) ([]*entity.UserToken, error) {
+func (r *JWTGormRepository) GetUserTokens(
+	ctx context.Context,
+	userID uint,
+) ([]*entity.UserToken, error) {
 	var tokens []*entity.UserToken
 	err := r.db.WithContext(ctx).Where("user_id = ? AND is_revoked = ? AND expires_at > ?",
 		userID, false, time.Now()).Find(&tokens).Error
@@ -64,21 +75,31 @@ func (r *JWTGormRepository) GetUserTokens(ctx context.Context, userID uint) ([]*
 }
 
 // RevokeUserToken 撤销用户的特定token
-func (r *JWTGormRepository) RevokeUserToken(ctx context.Context, userID uint, token string) error {
+func (r *JWTGormRepository) RevokeUserToken(
+	ctx context.Context,
+	userID uint,
+	token string,
+) error {
 	return r.db.WithContext(ctx).Model(&entity.UserToken{}).
 		Where("user_id = ? AND token = ?", userID, token).
 		Update("is_revoked", true).Error
 }
 
 // RevokeAllUserTokens 撤销用户的所有token
-func (r *JWTGormRepository) RevokeAllUserTokens(ctx context.Context, userID uint) error {
+func (r *JWTGormRepository) RevokeAllUserTokens(
+	ctx context.Context,
+	userID uint,
+) error {
 	return r.db.WithContext(ctx).Model(&entity.UserToken{}).
 		Where("user_id = ? AND is_revoked = ?", userID, false).
 		Update("is_revoked", true).Error
 }
 
 // ValidateToken 验证token是否有效
-func (r *JWTGormRepository) ValidateToken(ctx context.Context, token string) (bool, error) {
+func (r *JWTGormRepository) ValidateToken(
+	ctx context.Context,
+	token string,
+) (bool, error) {
 	// 检查是否在黑名单中
 	isBlacklisted, err := r.IsTokenBlacklisted(ctx, token)
 	if err != nil {
@@ -99,7 +120,10 @@ func (r *JWTGormRepository) ValidateToken(ctx context.Context, token string) (bo
 }
 
 // GetTokenInfo 获取token信息
-func (r *JWTGormRepository) GetTokenInfo(ctx context.Context, token string) (*entity.TokenInfo, error) {
+func (r *JWTGormRepository) GetTokenInfo(
+	ctx context.Context,
+	token string,
+) (*entity.TokenInfo, error) {
 	var userToken entity.UserToken
 	err := r.db.WithContext(ctx).Preload("User").
 		Where("token = ? AND is_revoked = ? AND expires_at > ?",
@@ -125,7 +149,11 @@ func (r *JWTGormRepository) GetTokenInfo(ctx context.Context, token string) (*en
 }
 
 // UpdateTokenExpiry 更新token过期时间
-func (r *JWTGormRepository) UpdateTokenExpiry(ctx context.Context, token string, newExpiry time.Time) error {
+func (r *JWTGormRepository) UpdateTokenExpiry(
+	ctx context.Context,
+	token string,
+	newExpiry time.Time,
+) error {
 	return r.db.WithContext(ctx).Model(&entity.UserToken{}).
 		Where("token = ?", token).
 		Update("expires_at", newExpiry).Error
@@ -134,12 +162,18 @@ func (r *JWTGormRepository) UpdateTokenExpiry(ctx context.Context, token string,
 // 兼容现有Service层的方法
 
 // CreateJwtBlacklist 创建JWT黑名单记录（兼容现有Service层）
-func (r *JWTGormRepository) CreateJwtBlacklist(ctx context.Context, jwtList *entity.JwtBlacklist) error {
+func (r *JWTGormRepository) CreateJwtBlacklist(
+	ctx context.Context,
+	jwtList *entity.JwtBlacklist,
+) error {
 	return r.db.WithContext(ctx).Create(jwtList).Error
 }
 
 // IsJwtInBlacklist 检查JWT是否在黑名单中（兼容现有Service层）
-func (r *JWTGormRepository) IsJwtInBlacklist(ctx context.Context, jwt string) (bool, error) {
+func (r *JWTGormRepository) IsJwtInBlacklist(
+	ctx context.Context,
+	jwt string,
+) (bool, error) {
 	var count int64
 	err := r.db.WithContext(ctx).Model(&entity.JwtBlacklist{}).
 		Where("jwt = ?", jwt).
@@ -155,7 +189,10 @@ func (r *JWTGormRepository) GetAllJwtBlacklist(ctx context.Context) ([]string, e
 }
 
 // GetUserByID 根据ID获取用户（兼容现有Service层）
-func (r *JWTGormRepository) GetUserByID(ctx context.Context, id uint) (*entity.User, error) {
+func (r *JWTGormRepository) GetUserByID(
+	ctx context.Context,
+	id uint,
+) (*entity.User, error) {
 	var user entity.User
 	err := r.db.WithContext(ctx).Where("id = ?", id).First(&user).Error
 	if err != nil {

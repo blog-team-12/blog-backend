@@ -96,7 +96,7 @@ func (j *JWTService) GetAccessToken(ctx context.Context, token string) (resR *re
 	claims := jwtTool.CreateAccessClaims(request.BaseClaims{
 		UserID: user.ID,
 		UUID:   user.UUID,
-		RoleID: user.RoleID,
+		// 注意：移除了RoleID，现在通过权限服务动态获取用户角色
 	})
 	Token, err := jwtTool.CreateAccessToken(claims)
 	if err != nil {

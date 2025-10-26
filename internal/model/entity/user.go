@@ -16,7 +16,6 @@ type User struct {
 	Avatar    string           `json:"avatar" gorm:"type:varchar(255);default:'';comment:'用户头像URL'"`                                     // 用户头像图片的URL地址
 	Address   string           `json:"address" gorm:"type:varchar(200);default:'';comment:'用户地址信息'"`                                     // 用户的地理位置或地址信息
 	Signature string           `json:"signature" gorm:"type:varchar(500);default:'签名是空白的，这位用户似乎比较低调。';comment:'用户个性签名'"`                  // 用户的个性签名或简介
-	RoleID    consts.RoleID   `json:"role_id" gorm:"type:tinyint;not null;default:2;index;comment:'用户角色ID'"`                           // 用户角色标识，关联角色权限系统
 	Register  consts.Register `json:"register" gorm:"type:tinyint;not null;default:1;comment:'注册来源'"`                                   // 用户注册来源（邮箱、第三方等）
 	Freeze    bool             `json:"freeze" gorm:"type:boolean;not null;default:false;index;comment:'用户冻结状态'"`                         // 用户账户是否被冻结（禁用）
 }

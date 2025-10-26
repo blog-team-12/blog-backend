@@ -181,7 +181,11 @@ func (p *PermissionService) CheckUserMenuPermission(ctx context.Context, userID 
 }
 
 // AssignRoleToUser 为用户分配角色
-func (p *PermissionService) AssignRoleToUser(ctx context.Context, userID, roleID uint) error {
+func (p *PermissionService) AssignRoleToUser(
+	ctx context.Context,
+	userID,
+	roleID uint,
+) error {
 	roleRepo := p.repositoryGroup.SystemRepositorySupplier.GetRoleRepository()
 
 	// 获取角色信息
@@ -191,7 +195,7 @@ func (p *PermissionService) AssignRoleToUser(ctx context.Context, userID, roleID
 	}
 
 	// 1. 先执行数据库操作
-	if err := roleRepo.AssignRoleToUser(ctx, userID, roleID); err != nil {
+	if err = roleRepo.AssignRoleToUser(ctx, userID, roleID); err != nil {
 		return fmt.Errorf("数据库分配角色失败: %w", err)
 	}
 
@@ -206,7 +210,7 @@ func (p *PermissionService) AssignRoleToUser(ctx context.Context, userID, roleID
 				zap.Uint("roleID", roleID),
 				zap.Error(rollbackErr))
 		}
-		return fmt.Errorf("Casbin添加用户角色失败:%w", err)
+		return fmt.Errorf("casbin添加用户角色失败:%w", err)
 	}
 
 	return nil
@@ -396,7 +400,7 @@ func (p *PermissionService) GetUserPermissions(ctx context.Context, userID uint)
 func (p *PermissionService) ClearAllPermission(ctx context.Context) error {
 	// 使用ClearPolicy清空所有策略和角色关系
 	p.casbinSvc.Enforcer.ClearPolicy()
-	
+
 	// 保存策略
 	err := p.casbinSvc.Enforcer.SavePolicy()
 	if err != nil {

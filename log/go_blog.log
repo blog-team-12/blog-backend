@@ -56,3 +56,99 @@
 {"level":"INFO","time":"2025-10-24T12:10:04.168+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
 {"level":"INFO","time":"2025-10-24T12:10:04.244+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
 {"level":"INFO","time":"2025-10-24T12:10:04.245+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-10-24T12:47:58.790+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-10-24T12:47:58.793+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-10-24T12:47:58.882+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-10-24T12:47:58.882+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-10-24T12:50:00.332+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0062302}
+{"level":"INFO","time":"2025-10-24T12:50:00.371+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0005247}
+{"level":"INFO","time":"2025-10-24T12:51:22.413+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-10-24T12:51:22.414+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-10-24T12:51:22.459+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-10-24T12:51:22.459+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-10-24T12:51:35.044+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0005044}
+{"level":"INFO","time":"2025-10-24T12:52:31.251+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-10-24T12:52:31.251+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-10-24T12:52:31.289+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-10-24T12:52:31.289+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-10-24T12:52:35.710+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0100923}
+{"level":"INFO","time":"2025-10-24T12:52:56.055+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0062954}
+{"level":"INFO","time":"2025-10-24T13:05:23.292+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-10-24T13:05:23.293+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-10-24T13:05:23.338+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-10-24T13:05:23.338+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-10-24T19:21:29.861+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-10-24T19:21:29.861+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-10-24T19:21:29.939+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-10-24T19:21:29.939+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"ERROR","time":"2025-10-24T19:21:51.791+0800","caller":"system/baseSvc.go:54","msg":"Verify校验CaptchaID与Captcha错误"}
+{"level":"ERROR","time":"2025-10-24T19:21:51.792+0800","caller":"system/baseCtrl.go:56","msg":"验证码校验错误","error":"邮箱验证码校验错误"}
+{"level":"INFO","time":"2025-10-24T19:21:51.792+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0013182}
+{"level":"INFO","time":"2025-10-24T19:22:05.132+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0055405}
+{"level":"INFO","time":"2025-10-24T19:22:07.824+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0069851}
+{"level":"INFO","time":"2025-10-24T19:23:17.886+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":1.3007085}
+{"level":"INFO","time":"2025-10-24T19:28:46.790+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-10-24T19:28:46.790+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-10-24T19:28:46.867+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-10-24T19:28:46.873+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-10-24T19:29:04.960+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0042387}
+{"level":"INFO","time":"2025-10-24T19:30:13.553+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":1.2402041}
+{"level":"ERROR","time":"2025-10-26T11:50:32.495+0800","caller":"core/gorm.go:27","msg":"Failed to connect to MySQL:","error":"dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it."}
+{"level":"INFO","time":"2025-10-26T13:04:39.454+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-10-26T13:04:39.455+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-10-26T13:04:39.532+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-10-26T13:04:39.532+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-10-26T13:44:42.886+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-10-26T13:44:42.887+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-10-26T13:44:42.966+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-10-26T13:44:42.966+0800","caller":"core/server.go:20","msg":"server run success on ","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-10-26T13:45:02.424+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0045598}
+{"level":"INFO","time":"2025-10-26T13:46:00.076+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":1.2208555}
+{"level":"ERROR","time":"2025-10-26T13:51:09.673+0800","caller":"system/userCtrl.go:23","msg":"绑定数据错误","error":"Key: 'RegisterReq.Password' Error:Field validation for 'Password' failed on the 'min' tag"}
+{"level":"INFO","time":"2025-10-26T13:51:09.673+0800","caller":"middleware/loggerMW.go:35","msg":"/user/register","status":200,"method":"POST","path":"/user/register","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0010305}
+{"level":"ERROR","time":"2025-10-26T13:51:55.362+0800","caller":"system/userCtrl.go:23","msg":"绑定数据错误","error":"Key: 'RegisterReq.Password' Error:Field validation for 'Password' failed on the 'min' tag"}
+{"level":"INFO","time":"2025-10-26T13:51:55.362+0800","caller":"middleware/loggerMW.go:35","msg":"/user/register","status":200,"method":"POST","path":"/user/register","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0005127}
+{"level":"INFO","time":"2025-10-26T13:52:04.581+0800","caller":"system/userSvc.go:35","msg":"开始验证用户注册信息","email":"test@example.com"}
+{"level":"ERROR","time":"2025-10-26T13:52:04.581+0800","caller":"system/userSvc.go:43","msg":"会话中未找到邮箱信息","requestEmail":"test@example.com"}
+{"level":"ERROR","time":"2025-10-26T13:52:04.581+0800","caller":"system/userCtrl.go:34","msg":"注册验证失败","email":"test@example.com","error":"会话已过期，请重新发送验证码"}
+{"level":"INFO","time":"2025-10-26T13:52:04.581+0800","caller":"middleware/loggerMW.go:35","msg":"/user/register","status":200,"method":"POST","path":"/user/register","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0}
+{"level":"INFO","time":"2025-10-26T13:52:30.021+0800","caller":"system/userSvc.go:35","msg":"开始验证用户注册信息","email":"w13839575053@qq.com"}
+{"level":"ERROR","time":"2025-10-26T13:52:30.021+0800","caller":"system/userSvc.go:43","msg":"会话中未找到邮箱信息","requestEmail":"w13839575053@qq.com"}
+{"level":"ERROR","time":"2025-10-26T13:52:30.021+0800","caller":"system/userCtrl.go:34","msg":"注册验证失败","email":"w13839575053@qq.com","error":"会话已过期，请重新发送验证码"}
+{"level":"INFO","time":"2025-10-26T13:52:30.021+0800","caller":"middleware/loggerMW.go:35","msg":"/user/register","status":200,"method":"POST","path":"/user/register","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0005103}
+{"level":"INFO","time":"2025-10-26T13:52:38.843+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0040122}
+{"level":"INFO","time":"2025-10-26T13:52:46.730+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0049669}
+{"level":"INFO","time":"2025-10-26T13:53:18.764+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":1.3630664}
+{"level":"INFO","time":"2025-10-26T13:53:39.857+0800","caller":"system/userSvc.go:35","msg":"开始验证用户注册信息","email":"w13839575053@qq.com"}
+{"level":"ERROR","time":"2025-10-26T13:53:39.858+0800","caller":"system/userSvc.go:43","msg":"会话中未找到邮箱信息","requestEmail":"w13839575053@qq.com"}
+{"level":"ERROR","time":"2025-10-26T13:53:39.858+0800","caller":"system/userCtrl.go:34","msg":"注册验证失败","email":"w13839575053@qq.com","error":"会话已过期，请重新发送验证码"}
+{"level":"INFO","time":"2025-10-26T13:53:39.858+0800","caller":"middleware/loggerMW.go:35","msg":"/user/register","status":200,"method":"POST","path":"/user/register","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0005092}
+{"level":"INFO","time":"2025-10-26T13:53:43.218+0800","caller":"system/userSvc.go:35","msg":"开始验证用户注册信息","email":"w13839575053@qq.com"}
+{"level":"ERROR","time":"2025-10-26T13:53:43.218+0800","caller":"system/userSvc.go:43","msg":"会话中未找到邮箱信息","requestEmail":"w13839575053@qq.com"}
+{"level":"ERROR","time":"2025-10-26T13:53:43.218+0800","caller":"system/userCtrl.go:34","msg":"注册验证失败","email":"w13839575053@qq.com","error":"会话已过期，请重新发送验证码"}
+{"level":"INFO","time":"2025-10-26T13:53:43.218+0800","caller":"middleware/loggerMW.go:35","msg":"/user/register","status":200,"method":"POST","path":"/user/register","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0005297}
+{"level":"INFO","time":"2025-10-26T13:56:07.843+0800","caller":"middleware/loggerMW.go:35","msg":"/captcha","status":404,"method":"GET","path":"/captcha","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0}
+{"level":"INFO","time":"2025-10-26T13:56:24.845+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0035105}
+{"level":"ERROR","time":"2025-10-26T13:56:38.443+0800","caller":"system/baseSvc.go:54","msg":"Verify校验CaptchaID与Captcha错误"}
+{"level":"ERROR","time":"2025-10-26T13:56:38.443+0800","caller":"system/baseCtrl.go:56","msg":"验证码校验错误","error":"邮箱验证码校验错误"}
+{"level":"INFO","time":"2025-10-26T13:56:38.443+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0}
+{"level":"INFO","time":"2025-10-26T13:56:50.868+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0051804}
+{"level":"INFO","time":"2025-10-26T13:57:54.571+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.005549}
+{"level":"ERROR","time":"2025-10-26T13:58:11.313+0800","caller":"system/baseSvc.go:54","msg":"Verify校验CaptchaID与Captcha错误"}
+{"level":"ERROR","time":"2025-10-26T13:58:11.313+0800","caller":"system/baseCtrl.go:56","msg":"验证码校验错误","error":"邮箱验证码校验错误"}
+{"level":"INFO","time":"2025-10-26T13:58:11.313+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0005608}
+{"level":"ERROR","time":"2025-10-26T13:58:12.384+0800","caller":"system/baseSvc.go:54","msg":"Verify校验CaptchaID与Captcha错误"}
+{"level":"ERROR","time":"2025-10-26T13:58:12.384+0800","caller":"system/baseCtrl.go:56","msg":"验证码校验错误","error":"邮箱验证码校验错误"}
+{"level":"INFO","time":"2025-10-26T13:58:12.384+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0}
+{"level":"ERROR","time":"2025-10-26T13:58:13.495+0800","caller":"system/baseSvc.go:54","msg":"Verify校验CaptchaID与Captcha错误"}
+{"level":"ERROR","time":"2025-10-26T13:58:13.495+0800","caller":"system/baseCtrl.go:56","msg":"验证码校验错误","error":"邮箱验证码校验错误"}
+{"level":"INFO","time":"2025-10-26T13:58:13.495+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0}
+{"level":"ERROR","time":"2025-10-26T13:58:14.655+0800","caller":"system/baseSvc.go:54","msg":"Verify校验CaptchaID与Captcha错误"}
+{"level":"ERROR","time":"2025-10-26T13:58:14.655+0800","caller":"system/baseCtrl.go:56","msg":"验证码校验错误","error":"邮箱验证码校验错误"}
+{"level":"INFO","time":"2025-10-26T13:58:14.655+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0006184}
+{"level":"ERROR","time":"2025-10-26T13:58:15.710+0800","caller":"system/baseSvc.go:54","msg":"Verify校验CaptchaID与Captcha错误"}
+{"level":"ERROR","time":"2025-10-26T13:58:15.710+0800","caller":"system/baseCtrl.go:56","msg":"验证码校验错误","error":"邮箱验证码校验错误"}
+{"level":"INFO","time":"2025-10-26T13:58:15.711+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0005142}
+{"level":"ERROR","time":"2025-10-26T13:58:24.466+0800","caller":"system/baseSvc.go:54","msg":"Verify校验CaptchaID与Captcha错误"}
+{"level":"ERROR","time":"2025-10-26T13:58:24.466+0800","caller":"system/baseCtrl.go:56","msg":"验证码校验错误","error":"邮箱验证码校验错误"}
+{"level":"INFO","time":"2025-10-26T13:58:24.466+0800","caller":"middleware/loggerMW.go:35","msg":"/base/sendEmailVerificationCode","status":200,"method":"POST","path":"/base/sendEmailVerificationCode","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.26100.6899","errors":"","cost":0.0010441}
