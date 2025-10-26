@@ -1,0 +1,12 @@
+# 可执行文件
+*.exe
+cmd.exe
+blog-service.exe
+
+# 日志文件
+*.log
+log/
+
+# 临时文件
+*.tmp
+*.temp
