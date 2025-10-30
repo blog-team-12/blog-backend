@@ -20,7 +20,10 @@ func NewUserRepository(db *gorm.DB) interfaces.UserRepository {
 }
 
 // GetByID 根据ID获取用户
-func (r *UserGormRepository) GetByID(ctx context.Context, id uint) (*entity.User, error) {
+func (r *UserGormRepository) GetByID(
+	ctx context.Context,
+	id uint,
+) (*entity.User, error) {
 	var user entity.User
 	err := r.db.WithContext(ctx).Where("id = ?", id).First(&user).Error
 	if err != nil {

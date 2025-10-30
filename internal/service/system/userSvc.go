@@ -1,11 +1,13 @@
 package system
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/gofrs/uuid"
+	"github.com/mojocn/base64Captcha"
 	"go.uber.org/zap"
 	"personal_blog/global"
 	"personal_blog/internal/model/consts"
@@ -24,14 +26,20 @@ type UserService struct {
 	permissionService *PermissionService        // 权限服务，用于RBAC角色分配
 }
 
-func NewUserService(repositoryGroup *repository.Group, permissionService *PermissionService) *UserService {
+func NewUserService(
+	repositoryGroup *repository.Group,
+	permissionService *PermissionService,
+) *UserService {
 	return &UserService{
 		userRepo:          repositoryGroup.SystemRepositorySupplier.GetUserRepository(),
 		roleRepo:          repositoryGroup.SystemRepositorySupplier.GetRoleRepository(),
 		permissionService: permissionService,
 	}
 }
-func (u *UserService) VerifyRegister(ctx *gin.Context, req *request.RegisterReq) error {
+func (u *UserService) VerifyRegister(
+	ctx *gin.Context,
+	req *request.RegisterReq,
+) error {
 	global.Log.Info("开始验证用户注册信息",
 		zap.String("email", req.Email))
 
@@ -88,7 +96,10 @@ func (u *UserService) VerifyRegister(ctx *gin.Context, req *request.RegisterReq)
 }
 
 // Register 注册
-func (u *UserService) Register(ctx *gin.Context, req *request.RegisterReq) (*entity.User, error) {
+func (u *UserService) Register(
+	ctx *gin.Context,
+	req *request.RegisterReq,
+) (*entity.User, error) {
 	// 检查邮箱是否已存在
 	exists, err := u.userRepo.ExistsByEmail(ctx, req.Email)
 	if err != nil {
@@ -126,6 +137,7 @@ func (u *UserService) Register(ctx *gin.Context, req *request.RegisterReq) (*ent
 		Register: consts.Email,
 		// 不直接设置 RoleID，将通过权限服务分配角色
 	}
+	global.Log.Error(user.Password)
 
 	err = u.userRepo.Create(ctx, user)
 	if err != nil {
@@ -160,11 +172,29 @@ func (u *UserService) Register(ctx *gin.Context, req *request.RegisterReq) (*ent
 			zap.Error(err))
 		return nil, fmt.Errorf("分配默认角色失败: %w", err)
 	}
-
-	global.Log.Info("用户注册成功并分配默认角色",
-		zap.Uint("user_id", user.ID),
-		zap.String("username", user.Username),
-		zap.String("role_code", defaultRole.Code),
-		zap.String("role_name", defaultRole.Name))
 	return user, nil
+}
+
+// EmailLogin 邮箱登录
+func (u *UserService) EmailLogin(
+	ctx context.Context,
+	userReq *entity.User,
+) (entity.User, error) {
+	user, err := u.userRepo.GetByEmail(ctx, userReq.Email) // 返回值，本身就可能是个空值
+
+	if err == nil {
+		if ok := util.BcryptCheck(userReq.Password, user.Password); !ok {
+			return entity.User{}, errors.New("邮箱或者验证码错误")
+		}
+		return *user, nil
+	}
+	return entity.User{}, err
+}
+
+// VerifyCode 校验验证码是否正确
+func (u *UserService) VerifyCode(
+	store base64Captcha.Store,
+	req request.LoginReq,
+) bool {
+	return store.Verify(req.CaptchaID, req.Captcha, true)
 }

@@ -40,7 +40,11 @@ func (b *BaseService) GetCaptcha(store base64Captcha.Store) (string, string, err
 	return id, b64s, err
 }
 
-func (b *BaseService) VerifyAndSendEmailCode(ctx *gin.Context, store base64Captcha.Store, req *request.SendEmailVerificationCodeReq) error {
+func (b *BaseService) VerifyAndSendEmailCode(
+	ctx *gin.Context,
+	store base64Captcha.Store,
+	req *request.SendEmailVerificationCodeReq,
+) error {
 	if store.Verify(req.CaptchaID, req.Captcha, true) { // 调用的是上方存在的session
 		//                        ↑             ↑            ↑
 		//   			        验证码ID      用户输入      验证后清除

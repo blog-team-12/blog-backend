@@ -1,11 +1,13 @@
 package jwt
 
 import (
+	"net"
+	"personal_blog/global"
+	"personal_blog/internal/model/dto/request"
+
 	"github.com/gin-gonic/gin"
 	"github.com/gofrs/uuid"
 	"go.uber.org/zap"
-	"personal_blog/global"
-	"personal_blog/internal/model/dto/request"
 )
 
 // GetAccessToken 从请求头获取Access Token
@@ -15,11 +17,12 @@ func GetAccessToken(c *gin.Context) string {
 	return token
 }
 
-// GetRefreshToken 从cookie获取Refresh Token
+// GetRefreshToken 仅从Cookie获取Refresh Token
 func GetRefreshToken(c *gin.Context) string {
-	// 尝试从cookie中获取refresh-token
-	token := c.Request.Header.Get("x-refresh-token")
-	return token
+	if cookieToken, err := c.Cookie("x-refresh-token"); err == nil {
+		return cookieToken
+	}
+	return ""
 }
 
 // GetUserID 从Gin的Context中获取JWT解析出来的用户ID
@@ -127,8 +130,6 @@ httpOnly（布尔值）：
 	作用：增强安全性，防止跨站脚本攻击（XSS）。HttpOnly 确保 Cookie 只能通过 HTTP 请求发送到服务器，客户端脚本无法读取，适合存储敏感数据如 Refresh Token。
 */
 
-//// SetRefreshToken 设置Refresh Token的cookie
-//func SetRefreshToken(c *gin.Context, token string, maxAge int) {
 //	// 获取请求的host，如果失败则取原始请求host
 //	// 为了正确设置domain属性
 //	host, _, err := net.SplitHostPort(c.Request.Host)
@@ -148,30 +149,33 @@ httpOnly（布尔值）：
 //			输入 controller.example.com:443 → 输出 host = "controller.example.com", port = "443"
 //		为什么需要拆分？ Cookie 的 Domain 属性只需要主机名（比如 example.com），不需要端口号。
 //	*/
-//	// 调用setCookie设置refresh-token
-//	setCookie(c, "x-refresh-token", token, maxAge, host)
-//
-//}
-//
-//// ClearRefreshToken 清除Refresh Token的cookie
-//func ClearRefreshToken(c *gin.Context) {
-//	// 获取请求的host，如果失败则取原始请求host
-//	host, _, err := net.SplitHostPort(c.Request.Host)
-//	if err != nil {
-//		host = c.Request.Host
-//	}
-//	// 调用setCookie设置cookie值为空并过期，删除refresh-token
-//	setCookie(c, "x-refresh-token", "", -1, host)
-//}
-//
-//// setCookie 设置指定名称和值的cookie
-//func setCookie(c *gin.Context, name, value string, maxAge int, host string) {
-//	// 判断host是否是IP地址
-//	if net.ParseIP(host) != nil {
-//		// 如果是IP地址，设置cookie的domain为“/”
-//		c.SetCookie(name, value, maxAge, "/", "", false, true)
-//	} else {
-//		// 如果是域名，设置cookie的domain为域名
-//		c.SetCookie(name, value, maxAge, "/", host, false, true)
-//	}
-//}
+
+// SetRefreshToken 设置 Refresh Token 的 HttpOnly Cookie
+func SetRefreshToken(c *gin.Context, token string, maxAge int) {
+	// 从请求 Host 中提取纯主机名（去掉端口）
+	host, _, err := net.SplitHostPort(c.Request.Host)
+	if err != nil {
+		host = c.Request.Host
+	}
+	setCookie(c, "x-refresh-token", token, maxAge, host)
+}
+
+// ClearRefreshToken 清除 Refresh Token 的 Cookie
+func ClearRefreshToken(c *gin.Context) {
+	host, _, err := net.SplitHostPort(c.Request.Host)
+	if err != nil {
+		host = c.Request.Host
+	}
+	setCookie(c, "x-refresh-token", "", -1, host)
+}
+
+// setCookie 设置指定名称和值的 Cookie
+func setCookie(c *gin.Context, name, value string, maxAge int, host string) {
+	// 判断 host 是否是 IP 地址；IP 访问下不要设置 domain
+	if net.ParseIP(host) != nil {
+		c.SetCookie(name, value, maxAge, "/", "", c.Request.TLS != nil, true)
+		return
+	}
+	// 域名访问：设置 domain 为主机名
+	c.SetCookie(name, value, maxAge, "/", host, c.Request.TLS != nil, true)
+}

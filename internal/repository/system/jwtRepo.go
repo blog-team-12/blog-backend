@@ -3,10 +3,11 @@ package system
 import (
 	"context"
 	"errors"
-	"gorm.io/gorm"
 	"personal_blog/internal/model/entity"
 	"personal_blog/internal/repository/interfaces"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 // JWTGormRepository JWT仓储GORM实现
@@ -20,7 +21,11 @@ func NewJwtRepository(db *gorm.DB) interfaces.JWTRepository {
 }
 
 // AddToBlacklist 将token添加到黑名单
-func (r *JWTGormRepository) AddToBlacklist(ctx context.Context, token string, expiry time.Time) error {
+func (r *JWTGormRepository) AddToBlacklist(
+	ctx context.Context,
+	token string,
+	expiry time.Time,
+) error {
 	blacklist := &entity.TokenBlacklist{
 		Token:     token,
 		ExpiresAt: expiry,
