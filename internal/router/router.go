@@ -1,14 +1,15 @@
 package router
 
 import (
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
+	"net/http"
 	"personal_blog/global"
 	"personal_blog/internal/middleware"
 	"personal_blog/internal/router/system"
 	"personal_blog/internal/service"
+	"strings"
 	"time"
-
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/cookie"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,8 +24,27 @@ func InitRouter() *gin.Engine {
 	Router := gin.New()
 	// 开启并记录堆栈信息
 	Router.Use(middleware.GinLogger(), middleware.GinRecovery(true))
+	// 跨域中间件，开发环境允许 http://localhost:3000 访问
+	Router.Use(middleware.CORSMiddleware())
 	// 添加会话中间件
 	var store = cookie.NewStore([]byte(global.Config.System.SessionsSecret))
+	// 根据环境切换会话 Cookie 选项：
+	// - HTTP开发：SameSite=Lax, Secure=false（同源或顶层导航携带）
+	// - HTTPS/生产：SameSite=None, Secure=true（允许跨站XHR/Fetch携带）
+	var sameSite http.SameSite = http.SameSiteLaxMode
+	var secure = false
+	env := strings.ToLower(strings.TrimSpace(global.Config.System.Env))
+	if env == "release" || strings.Contains(env, "https") {
+		sameSite = http.SameSiteNoneMode
+		secure = true
+	}
+	store.Options(sessions.Options{
+		Path:     "/",
+		MaxAge:   5 * 60,
+		HttpOnly: true,
+		Secure:   secure,
+		SameSite: sameSite,
+	})
 	Router.Use(sessions.Sessions("session", store))
 	// 添加超时中间件
 	Router.Use(middleware.TimeoutMiddleware(30 * time.Second)) // 30秒请求超时

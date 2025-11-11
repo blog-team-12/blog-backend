@@ -23,7 +23,7 @@ func NewConfig() *Config {
 		URL:            viper.GetString("es.url"),
 		Username:       viper.GetString("es.username"),
 		Password:       viper.GetString("es.password"),
-		IsConsolePrint: viper.GetBool("es.isConsolePrint"),
+		IsConsolePrint: viper.GetBool("es.is_console_print"),
 	}
 	// Redis配置初始化
 	_redis := &Redis{
@@ -48,10 +48,10 @@ func NewConfig() *Config {
 		Host:           viper.GetString("system.host"),
 		Port:           viper.GetInt("system.port"),
 		Env:            viper.GetString("system.env"),
-		RouterPrefix:   viper.GetString("system.routerPrefix"),
-		UseMultipoint:  viper.GetBool("system.useMultipoint"),
-		SessionsSecret: viper.GetString("system.sessionsSecret"),
-		OssType:        viper.GetString("system.ossType"),
+		RouterPrefix:   viper.GetString("system.router_prefix"),
+		UseMultipoint:  viper.GetBool("system.use_multipoint"),
+		SessionsSecret: viper.GetString("system.sessions_secret"),
+		OssType:        viper.GetString("system.oss_type"),
 		
 		// 角色配置
 		DefaultRoleCode: viper.GetString("system.default_role_code"),

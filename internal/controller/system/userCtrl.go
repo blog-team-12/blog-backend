@@ -39,7 +39,7 @@ func (u *UserCtrl) Register(ctx *gin.Context) {
 		global.Log.Error("注册验证失败",
 			zap.String("email", req.Email), zap.Error(err))
 		response.NewResponse[any, any](ctx).SetCode(global.StatusBadRequest).
-			Failed(fmt.Sprintf("注册验证失败: %v", err), nil)
+			Failed(fmt.Sprintf("注册参数，验证失败: %v", err), nil)
 		return
 	}
 

@@ -68,7 +68,10 @@ func (b *BaseService) SendEmailVerificationCode(ctx *gin.Context, to string) err
 	session.Set("verification_code", verificationCode)
 	session.Set("email", to)
 	session.Set("expire_time", expireTime)
-	_ = session.Save()
+	err := session.Save()
+	if err != nil {
+		global.Log.Error("保存session错误：", zap.Error(err))
+	}
 
 	subject := "您的邮箱验证码"
 	body := `亲爱的用户[` + to + `]，<br/>
