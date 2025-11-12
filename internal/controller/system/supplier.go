@@ -8,6 +8,7 @@ type Supplier interface {
     GetRefreshTokenCtrl() *RefreshTokenCtrl
     GetBaseCtrl() *BaseCtrl
     GetUserCtrl() *UserCtrl
+    GetImageCtrl() *ImageCtrl
 }
 
 // SetUp 工厂函数-单例
@@ -22,6 +23,10 @@ func SetUp(service *service.Group) Supplier {
     cs.userCtrl = &UserCtrl{
         userService: service.SystemServiceSupplier.GetUserService(),
         jwtService:  service.SystemServiceSupplier.GetJWTService(),
+    }
+    cs.imageCtrl = &ImageCtrl{
+        imageService: service.SystemServiceSupplier.GetImageService(),
+        jwtService:   service.SystemServiceSupplier.GetJWTService(),
     }
     return cs
 }

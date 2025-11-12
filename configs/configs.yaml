@@ -18,13 +18,12 @@ redis:
   password: ""             # Redis 无密码（默认）
   db: 0                    # 使用第 0 个数据库
 system:
-  host: 192.168.20.16 # 服务监听所有网络接口（外部可通过服务器IP访问）
+  host: 0.0.0.0 # 监听所有本地网卡；外部访问用机器实际IP
   port: 8080 # 服务对外暴露的端口号
   env: dev # 应用运行环境（release=生产环境；dev=开发环境；test=测试环境等）
   router_prefix: controller # API 接口的统一前缀（所有接口路径会以 /controller 开头）
   use_multipoint: true # 是否启用"多点"能力（如多客户端连接、多节点通信等场景）
   sessions_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx # Session 加密/签名的密钥（保障会话安全）
-  oss_type: local # 对象存储（OSS）类型（local=本地存储；若为 ali/ tencent 则对应云存储）
   default_role_code: "user" # 新用户注册时的默认角色代码
   default_role_name: "普通用户" # 默认角色的显示名称
 zap:
@@ -39,7 +38,7 @@ jwt:
   access_token_secret: a8f5f167f44f4964e6c998dee827110c3b2e5a8b5d2f8e4c9a1b3d7f6e0c2a4b  # 访问令牌密钥，用于签名和验证访问令牌
   refresh_token_secret: b9e6e278e55e5a75f7d099eff938221d4c3f6b9c6e3f9f5d0a2c4e8g7f1d3b5c  # 刷新令牌密钥，用于签名和验证刷新令牌
   access_token_expiry_time: 15m   # 访问令牌过期时间，2小时后需要刷新
-  refresh_token_expiry_time: 7d  # 刷新令牌过期时间，7天后需要重新登录
+  refresh_token_expiry_time: 15d  # 刷新令牌过期时间，7天后需要重新登录
   issuer: go_blog system               # JWT 发行者标识，用于标识令牌的发行方
 
 # 文件上传配置
@@ -91,3 +90,28 @@ website:
   email: w13839575053@qq.com                 # 博主联系邮箱
   qq_image: ""                               # QQ二维码图片路径
   wechat_image: ""                           # 微信二维码图片路径
+
+# 存储驱动配置
+storage:
+  current: "qiniu"   # 默认驱动：local 或 qiniu
+  local:
+    base_url: ""      # 为空时复用 system.host + static.prefix
+    key_prefix: ""    # 对象键前缀（可选）
+  qiniu:
+    bucket: "wdx89"        # 七牛空间名（对应“空间管理”中的“wdx89”）
+    domain: "http://t4vpotpd5.hn-bkt.clouddn.com"        # 访问域名（从文件链接提取，七牛测试域名）
+    key_prefix: ""    # 对象键前缀（可选）
+    access_key: "l1ck5kcmqbuyEcqb9RIIyIpZW6gYRXg-uTIUi4cB"  # AK（可用环境变量覆盖）
+    secret_key: "XLm1_etEN2EyY-wt35VLnyM_utDELjVrxZN5boZb"  # SK（可用环境变量覆盖）
+# 静态文件配置
+static:
+  path: "./static/images"
+  prefix: "/images"
+  max_size: 16
+  max_uploads: 15
+  allowed_types:
+    - ".png"
+    - ".jpeg"
+    - ".gif"
+    - ".jpg"
+    - ".bin"

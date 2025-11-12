@@ -17,5 +17,7 @@ func SQL() error {
 		&entity.Menu{},           // 菜单表
 		&entity.API{},            // API接口表
 		&entity.UserRole{},       // 用户角色关联表
+		&entity.API{},            // api表
+		&entity.Image{},          // 图片表
 	)
 }

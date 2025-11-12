@@ -39,6 +39,22 @@ func InitConfig(path string) {
 	_ = viper.BindEnv("email.secret", "EMAIL_SECRET")
 	_ = viper.BindEnv("email.is_ssl", "EMAIL_IS_SSL")
 
+	// 绑定存储驱动相关配置到环境变量
+	_ = viper.BindEnv("storage.current", "STORAGE_CURRENT")
+	_ = viper.BindEnv("storage.local.base_url", "STORAGE_LOCAL_BASE_URL")
+	_ = viper.BindEnv("storage.local.key_prefix", "STORAGE_LOCAL_KEY_PREFIX")
+	_ = viper.BindEnv("storage.qiniu.bucket", "STORAGE_QINIU_BUCKET")
+	_ = viper.BindEnv("storage.qiniu.domain", "STORAGE_QINIU_DOMAIN")
+	_ = viper.BindEnv("storage.qiniu.key_prefix", "STORAGE_QINIU_KEY_PREFIX")
+	_ = viper.BindEnv("storage.qiniu.access_key", "STORAGE_QINIU_ACCESS_KEY")
+	_ = viper.BindEnv("storage.qiniu.secret_key", "STORAGE_QINIU_SECRET_KEY")
+
+	// 绑定静态文件相关配置到环境变量
+	_ = viper.BindEnv("static.path", "STATIC_PATH")
+	_ = viper.BindEnv("static.prefix", "STATIC_PREFIX")
+	_ = viper.BindEnv("static.max_size", "STATIC_MAX_SIZE")
+	_ = viper.BindEnv("static.max_uploads", "STATIC_MAX_UPLOADS")
+
 	// 绑定Elasticsearch相关配置到环境变量（补充完整）
 	_ = viper.BindEnv("es.url", "ES_URL")
 	_ = viper.BindEnv("es.username", "ES_USERNAME")
@@ -67,14 +83,7 @@ func InitConfig(path string) {
 	_ = viper.BindEnv("mysql.max_open_conns", "DB_MAX_OPEN_CONNS")
 	_ = viper.BindEnv("mysql.log_mode", "DB_LOG_MODE")
 
-	// 绑定七牛云相关配置到环境变量
-	_ = viper.BindEnv("qiniu.zone", "QINIU_ZONE")
-	_ = viper.BindEnv("qiniu.bucket", "QINIU_BUCKET")
-	_ = viper.BindEnv("qiniu.img_path", "QINIU_IMG_PATH")
-	_ = viper.BindEnv("qiniu.access_key", "QINIU_ACCESS_KEY")
-	_ = viper.BindEnv("qiniu.secret_key", "QINIU_SECRET_KEY")
-	_ = viper.BindEnv("qiniu.use_https", "QINIU_USE_HTTPS")
-	_ = viper.BindEnv("qiniu.use_cdn_domains", "QINIU_USE_CDN_DOMAINS")
+    // 旧版 qiniu.* 环境变量绑定已废弃，统一使用 storage.qiniu.*
 
 	// 绑定QQ登录相关配置到环境变量
 	_ = viper.BindEnv("qq.enable", "QQ_ENABLE")
@@ -94,7 +103,7 @@ func InitConfig(path string) {
 	_ = viper.BindEnv("system.router_prefix", "SYSTEM_ROUTER_PREFIX")
 	_ = viper.BindEnv("system.use_multipoint", "SYSTEM_USE_MULTIPOINT")
 	_ = viper.BindEnv("system.sessions_secret", "SYSTEM_SESSIONS_SECRET")
-	_ = viper.BindEnv("system.oss_type", "SYSTEM_OSS_TYPE")
+	// 已简化：不再绑定 system.oss_type，统一使用 storage.current 控制驱动
 
 	// 绑定文件上传相关配置到环境变量
 	_ = viper.BindEnv("upload.size", "UPLOAD_SIZE")

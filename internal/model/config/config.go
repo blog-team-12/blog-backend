@@ -4,17 +4,19 @@ import "github.com/spf13/viper"
 
 // Config 应用全局配置结构体，包含所有核心模块配置
 type Config struct {
-	ES      ES      `json:"es" yaml:"es"`           // Elasticsearch配置
-	Redis   Redis   `json:"redis" yaml:"redis"`     // Redis配置
-	Mysql   Mysql   `json:"mysql" yaml:"mysql"`     // MySQL数据库配置
-	System  System  `json:"system" yaml:"system"`   // 系统服务配置
-	Zap     Zap     `json:"zap" yaml:"zap"`         // 日志配置
-	JWT     JWT     `json:"jwt" yaml:"jwt"`         // JWT认证配置
-	Upload  Upload  `json:"upload" yaml:"upload"`   // 文件上传配置
-	Captcha Captcha `json:"captcha" yaml:"captcha"` // 验证码配置
-	Email   Email   `json:"email" yaml:"email"`     // 邮件发送配置
-	Gaode   Gaode   `json:"gaode" yaml:"gaode"`     // 高德地图API配置
-	Website Website `json:"website" yaml:"website"` // 个人网站配置
+    ES      ES      `json:"es" yaml:"es"`           // Elasticsearch配置
+    Redis   Redis   `json:"redis" yaml:"redis"`     // Redis配置
+    Mysql   Mysql   `json:"mysql" yaml:"mysql"`     // MySQL数据库配置
+    System  System  `json:"system" yaml:"system"`   // 系统服务配置
+    Zap     Zap     `json:"zap" yaml:"zap"`         // 日志配置
+    JWT     JWT     `json:"jwt" yaml:"jwt"`         // JWT认证配置
+    Upload  Upload  `json:"upload" yaml:"upload"`   // 文件上传配置
+    Captcha Captcha `json:"captcha" yaml:"captcha"` // 验证码配置
+    Email   Email   `json:"email" yaml:"email"`     // 邮件发送配置
+    Gaode   Gaode   `json:"gaode" yaml:"gaode"`     // 高德地图API配置
+    Website Website `json:"website" yaml:"website"` // 个人网站配置
+    Storage Storage `json:"storage" yaml:"storage"` // 存储驱动配置
+    Static  Static  `json:"static" yaml:"static"`   // 静态文件配置
 }
 
 func NewConfig() *Config {
@@ -51,8 +53,7 @@ func NewConfig() *Config {
 		RouterPrefix:   viper.GetString("system.router_prefix"),
 		UseMultipoint:  viper.GetBool("system.use_multipoint"),
 		SessionsSecret: viper.GetString("system.sessions_secret"),
-		OssType:        viper.GetString("system.oss_type"),
-		
+
 		// 角色配置
 		DefaultRoleCode: viper.GetString("system.default_role_code"),
 		DefaultRoleName: viper.GetString("system.default_role_name"),
@@ -96,6 +97,29 @@ func NewConfig() *Config {
 		Secret:   viper.GetString("email.secret"),
 		IsSSL:    viper.GetBool("email.is_ssl"),
 	}
+	// 存储驱动配置初始化
+	_storage := &Storage{
+		Current: viper.GetString("storage.current"),
+		Local: StorageLocal{
+			BaseURL:   viper.GetString("storage.local.base_url"),
+			KeyPrefix: viper.GetString("storage.local.key_prefix"),
+		},
+		Qiniu: StorageQiniu{
+			Bucket:    viper.GetString("storage.qiniu.bucket"),
+			Domain:    viper.GetString("storage.qiniu.domain"),
+			KeyPrefix: viper.GetString("storage.qiniu.key_prefix"),
+			AccessKey: viper.GetString("storage.qiniu.access_key"),
+			SecretKey: viper.GetString("storage.qiniu.secret_key"),
+		},
+	}
+	// 静态文件配置初始化
+	_static := &Static{
+		Path:         viper.GetString("static.path"),
+		Prefix:       viper.GetString("static.prefix"),
+		MaxSize:      viper.GetInt("static.max_size"),
+		MaxUploads:   viper.GetInt("static.max_uploads"),
+		AllowedTypes: viper.GetStringSlice("static.allowed_types"),
+	}
 	// 高德地图API配置初始化
 	_gaode := &Gaode{
 		Enable: viper.GetBool("gaode.enable"),
@@ -135,6 +159,8 @@ func NewConfig() *Config {
 		Upload:  *_upload,
 		Captcha: *_captcha,
 		Email:   *_email,
+		Storage: *_storage,
+		Static:  *_static,
 		Gaode:   *_gaode,
 		Website: *_website,
 	}

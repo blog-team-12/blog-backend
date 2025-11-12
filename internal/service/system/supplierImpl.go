@@ -2,11 +2,12 @@ package system
 
 // supplier implementation 用于底层实现
 type serviceSupplier struct {
-	esService         *EsService
-	jwtService        *JWTService
-	permissionService *PermissionService
-	baseService       *BaseService
-	userService       *UserService
+    esService         *EsService
+    jwtService        *JWTService
+    permissionService *PermissionService
+    baseService       *BaseService
+    userService       *UserService
+    imageService      *ImageService
 }
 
 func (s *serviceSupplier) GetEsService() *EsService {
@@ -22,5 +23,9 @@ func (s *serviceSupplier) GetBaseService() *BaseService {
 	return s.baseService
 }
 func (s *serviceSupplier) GetUserService() *UserService {
-	return s.userService
+    return s.userService
+}
+
+func (s *serviceSupplier) GetImageService() *ImageService {
+    return s.imageService
 }

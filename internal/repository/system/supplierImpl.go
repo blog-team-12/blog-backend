@@ -3,11 +3,12 @@ package system
 import "personal_blog/internal/repository/interfaces"
 
 type RepositorySupplier struct {
-	userRepository interfaces.UserRepository
-	jwtRepository  interfaces.JWTRepository
-	roleRepository interfaces.RoleRepository
-	menuRepository interfaces.MenuRepository
-	apiRepository  interfaces.APIRepository
+    userRepository interfaces.UserRepository
+    jwtRepository  interfaces.JWTRepository
+    roleRepository interfaces.RoleRepository
+    menuRepository interfaces.MenuRepository
+    apiRepository  interfaces.APIRepository
+    imageRepository interfaces.ImageRepository
 }
 
 func (r *RepositorySupplier) GetUserRepository() interfaces.UserRepository {
@@ -27,5 +28,9 @@ func (r *RepositorySupplier) GetMenuRepository() interfaces.MenuRepository {
 }
 
 func (r *RepositorySupplier) GetAPIRepository() interfaces.APIRepository {
-	return r.apiRepository
+    return r.apiRepository
+}
+
+func (r *RepositorySupplier) GetImageRepository() interfaces.ImageRepository {
+    return r.imageRepository
 }
