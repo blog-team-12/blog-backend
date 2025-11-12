@@ -43,8 +43,7 @@ func InitRouter() *gin.Engine {
 		systemRouter.InitBaseRouter(PublicGroup)
 		// 用户路由
 		systemRouter.InitUserRouter(PublicGroup)
-		// todo 登录、注册、健康检测
-
+		// todo 登录、注册、健康检测.
 	}
 
 	// 系统管理路由 - 需要JWT认证与权限管理
