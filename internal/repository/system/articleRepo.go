@@ -70,12 +70,15 @@ func (r *ArticleGormRepository) AddOrIncTag(
             tx.WithContext(ctx).Where("tag = ?", tag).First(&t).Error,
             gorm.ErrRecordNotFound,
         ) {
-            if err := tx.Create(&entity.ArticleTag{Tag: tag, Number: 1}).Error; err != nil {
+            if err := tx.WithContext(ctx).Create(&entity.ArticleTag{Tag: tag, Number: 1}).Error; err != nil {
                 return err
             }
             continue
         }
-        if err := tx.Model(&t).Update("number", gorm.Expr("number + ?", 1)).Error; err != nil {
+        if err := tx.WithContext(ctx).
+            Model(&entity.ArticleTag{}).
+            Where("tag = ?", tag).
+            Update("number", gorm.Expr("number + ?", 1)).Error; err != nil {
             return err
         }
     }
@@ -99,13 +102,17 @@ func (r *ArticleGormRepository) DecOrDeleteTag(
             }
             return err
         }
-        if err := tx.WithContext(ctx).Model(&t).Update("number", gorm.Expr("number - ?", 1)).Error; err != nil {
-            return err
-        }
-        if t.Number == 1 {
+        if t.Number <= 1 {
             if err := tx.WithContext(ctx).Delete(&t).Error; err != nil {
                 return err
             }
+            continue
+        }
+        if err := tx.WithContext(ctx).
+            Model(&entity.ArticleTag{}).
+            Where("tag = ?", tag).
+            Update("number", gorm.Expr("number - ?", 1)).Error; err != nil {
+            return err
         }
     }
     return nil

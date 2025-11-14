@@ -19,6 +19,7 @@ type ArticleDeleteReq struct {
 // ArticleUpdateReq 更新文章请求体
 type ArticleUpdateReq struct {
 	ID           string   `json:"id" binding:"required"`         // elasticsearch中每篇文章对应的ID
+	Cover        string   `json:"cover" binding:"required"`      // 封面url
 	Title        string   `json:"title" binding:"required"`      // 标题
 	Category     string   `json:"category" binding:"required"`   // 列表/专栏
 	Tags         []string `json:"tags" binding:"required"`       // 标记

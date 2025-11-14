@@ -12,6 +12,7 @@ import (
 	"personal_blog/pkg/articleUtils"
 	esUtil "personal_blog/pkg/elasticSearch"
 	"personal_blog/pkg/imageUtils"
+	"personal_blog/pkg/util"
 	"time"
 
 	"go.uber.org/zap"
@@ -139,4 +140,165 @@ func (a *ArticleSvc) ArticleDelete(ctx context.Context, req *request.ArticleDele
 		}
 		return nil
 	})
+}
+
+func (a *ArticleSvc) UpdateArticle(ctx context.Context, req request.ArticleUpdateReq) error {
+	now := time.Now().Format("2006-01-02 15:04:05")
+	articleToUpdate := struct {
+		UpdatedAt    string   `json:"updated_at"`
+		Cover        string   `json:"cover"`
+		Title        string   `json:"title"`
+		Keyword      string   `json:"keyword"`
+		Category     string   `json:"category"`
+		Tags         []string `json:"tags"`
+		Abstract     string   `json:"abstract"`
+		VisibleRange uint     `json:"visible_range"`
+		Content      string   `json:"content"`
+	}{
+		UpdatedAt:    now,
+		Cover:        req.Cover,
+		Title:        req.Title,
+		Keyword:      req.Title,
+		Category:     req.Category,
+		Tags:         req.Tags,
+		Abstract:     req.Abstract,
+		VisibleRange: req.VisibleRange,
+		Content:      req.Content,
+	}
+	return a.articleRepo.Transaction(ctx, func(tx *gorm.DB) error {
+		// 1、获取旧文章
+		oldArticle, err := esUtil.Get(ctx, req.ID)
+		if err != nil {
+			global.Log.Warn("获取旧文章失败", zap.String("id", req.ID), zap.Error(err))
+			return fmt.Errorf("获取旧文章失败: %v", err)
+		}
+		// 2、更新分类计数
+		if err = a.updateCategoryCounts(ctx, tx, oldArticle.Category, articleToUpdate.Category); err != nil {
+			return err
+		}
+		// 3、更新标签计数
+		if err = a.updateTagCounts(ctx, tx, oldArticle.Tags, articleToUpdate.Tags); err != nil {
+			return err
+		}
+		// 4、修改图片类别
+		if err = updateCoverCategory(ctx, tx, oldArticle.Cover, articleToUpdate.Cover); err != nil {
+			return err
+		}
+		// 5、修改插图类别
+		if err = updateIllustrationsCategory(ctx, tx, oldArticle.Content, articleToUpdate.Content); err != nil {
+			return err
+		}
+		// 6、更新文章
+		if err = esUtil.Update(ctx, req.ID, articleToUpdate); err != nil {
+			global.Log.Error("更新文章内容失败", zap.String("id", req.ID), zap.Error(err))
+			return fmt.Errorf("更新文章内容失败: %v", err)
+		}
+		return nil
+	})
+}
+
+// updateCategoryCounts 分类计数调整：旧分类-1/删除，新分类+1/创建
+func (a *ArticleSvc) updateCategoryCounts(
+	ctx context.Context,
+	tx *gorm.DB,
+	oldCategory,
+	newCategory string,
+) error {
+	if oldCategory == newCategory {
+		return nil
+	}
+	if oldCategory != "" {
+		if err := a.articleRepo.DecOrDeleteCategory(ctx, tx, oldCategory); err != nil {
+			global.Log.Error("更新分类计数失败", zap.String("category", oldCategory), zap.Error(err))
+			return fmt.Errorf("更新分类计数失败: %v", err)
+		}
+	}
+	if newCategory != "" {
+		if err := a.articleRepo.IncOrCreateCategory(ctx, tx, newCategory); err != nil {
+			global.Log.Error("更新分类计数失败", zap.String("category", newCategory), zap.Error(err))
+			return fmt.Errorf("更新分类计数失败: %v", err)
+		}
+	}
+	return nil
+}
+
+// updateTagCounts 标签计数调整：新增+1/创建，删除-1/删除
+func (a *ArticleSvc) updateTagCounts(
+	ctx context.Context,
+	tx *gorm.DB,
+	oldTags,
+	newTags []string,
+) error {
+	added, removed := util.DiffArrays(oldTags, newTags)
+	if len(removed) > 0 {
+		if err := a.articleRepo.DecOrDeleteTag(ctx, tx, removed); err != nil {
+			global.Log.Error("更新标签计数失败", zap.Strings("tags", removed), zap.Error(err))
+			return fmt.Errorf("更新标签计数失败: %v", err)
+		}
+	}
+	if len(added) > 0 {
+		if err := a.articleRepo.AddOrIncTag(ctx, tx, added); err != nil {
+			global.Log.Error("更新标签计数失败", zap.Strings("tags", added), zap.Error(err))
+			return fmt.Errorf("更新标签计数失败: %v", err)
+		}
+	}
+	return nil
+}
+
+// updateCoverCategory 封面类别更新
+func updateCoverCategory(
+	ctx context.Context,
+	tx *gorm.DB,
+	oldCover,
+	newCover string,
+) error {
+	if oldCover == newCover {
+		return nil
+	}
+	if oldCover != "" {
+		if err := imageUtils.InitImagesCategory(ctx, tx, []string{oldCover}); err != nil {
+			global.Log.Error("初始化封面类别失败", zap.String("url", oldCover), zap.Error(err))
+			return fmt.Errorf("初始化封面类别失败: %v", err)
+		}
+	}
+	if newCover != "" {
+		if err := imageUtils.ChangeImagesCategory(ctx, tx, []string{newCover}, consts.Category(4)); err != nil {
+			global.Log.Error("更新封面类别失败", zap.String("url", newCover), zap.Error(err))
+			return fmt.Errorf("更新封面类别失败: %v", err)
+		}
+	}
+	return nil
+}
+
+// updateIllustrationsCategory 插图类别更新
+func updateIllustrationsCategory(
+	ctx context.Context,
+	tx *gorm.DB,
+	oldContent,
+	newContent string,
+) error {
+	oldIllustrations, err := imageUtils.FindIllustrations(oldContent)
+	if err != nil {
+		global.Log.Warn("解析旧插图失败", zap.Error(err))
+		oldIllustrations = nil
+	}
+	newIllustrations, err := imageUtils.FindIllustrations(newContent)
+	if err != nil {
+		global.Log.Warn("解析新插图失败", zap.Error(err))
+		newIllustrations = nil
+	}
+	addedIllustrations, removedIllustrations := util.DiffArrays(oldIllustrations, newIllustrations)
+	if len(removedIllustrations) > 0 {
+		if err = imageUtils.InitImagesCategory(ctx, tx, removedIllustrations); err != nil {
+			global.Log.Error("初始化插图类别失败", zap.Strings("urls", removedIllustrations), zap.Error(err))
+			return fmt.Errorf("初始化插图类别失败: %v", err)
+		}
+	}
+	if len(addedIllustrations) > 0 {
+		if err = imageUtils.ChangeImagesCategory(ctx, tx, addedIllustrations, consts.Category(4)); err != nil {
+			global.Log.Error("更新插图类别失败", zap.Strings("urls", addedIllustrations), zap.Error(err))
+			return fmt.Errorf("更新插图类别失败: %v", err)
+		}
+	}
+	return nil
 }

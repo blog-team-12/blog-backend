@@ -15,5 +15,6 @@ func (ArticleRouter) InitArticleRouter(Router *gin.RouterGroup) {
 	{
 		articleRouter.POST("create", articleCtrl.CreateArticle)   // 创建文章
 		articleRouter.DELETE("delete", articleCtrl.DeleteArticle) // 删除文章
+		articleRouter.PUT("update", articleCtrl.ArticleUpdate)    // 更新文章
 	}
 }

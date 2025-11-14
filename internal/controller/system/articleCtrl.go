@@ -15,6 +15,7 @@ type ArticleCtrl struct {
 	articleSvc *serviceSystem.ArticleSvc
 }
 
+// CreateArticle 创建文章
 func (a *ArticleCtrl) CreateArticle(ctx *gin.Context) {
 	var req request.ArticleCreateReq
 	err := ctx.ShouldBindJSON(&req)
@@ -43,6 +44,8 @@ func (a *ArticleCtrl) CreateArticle(ctx *gin.Context) {
 			"visible_range": req.VisibleRange,
 		})
 }
+
+// DeleteArticle 删除文章
 func (a *ArticleCtrl) DeleteArticle(ctx *gin.Context) {
 	var req request.ArticleDeleteReq
 	err := ctx.ShouldBindJSON(&req)
@@ -66,4 +69,29 @@ func (a *ArticleCtrl) DeleteArticle(ctx *gin.Context) {
 		Success("删除成功", map[string]any{
 			"count": len(req.IDs),
 		})
+}
+
+// ArticleUpdate 更新文章
+func (a *ArticleCtrl) ArticleUpdate(c *gin.Context) {
+    var req request.ArticleUpdateReq
+    if err := c.ShouldBindJSON(&req); err != nil {
+        global.Log.Error("绑定数据错误", zap.Error(err))
+        response.NewResponse[any, any](c).
+            SetCode(global.StatusBadRequest).
+            Failed("绑定数据错误", nil)
+        return
+    }
+    if err := a.articleSvc.UpdateArticle(c.Request.Context(), req); err != nil {
+        global.Log.Error("更新文章失败", zap.String("id", req.ID), zap.Error(err))
+        response.NewResponse[any, any](c).
+            SetCode(global.StatusInternalServerError).
+            Failed("更新文章失败", nil)
+        return
+    }
+    response.NewResponse[any, any](c).
+        SetCode(global.StatusOK).
+        Success("更新成功", map[string]any{
+            "id": req.ID,
+            "title": req.Title,
+        })
 }
