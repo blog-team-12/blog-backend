@@ -857,3 +857,25 @@
 {"level":"INFO","time":"2025-11-14T15:40:48.815+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0673474}
 {"level":"INFO","time":"2025-11-14T15:42:44.697+0800","caller":"middleware/loggerMW.go:35","msg":"/article/delete","status":404,"method":"DELETE","path":"/article/delete","query":"ids=Yc1PgZoBqLjRJf09S7ML","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0}
 {"level":"ERROR","time":"2025-11-14T20:09:42.454+0800","caller":"flag/enter.go:92","msg":"Failed to create ES indices:","error":"an error happened during the Exists query execution: dial tcp 127.0.0.1:9200: connectex: No connection could be made because the target machine actively refused it."}
+{"level":"ERROR","time":"2025-11-14T20:23:57.776+0800","caller":"core/gorm.go:27","msg":"Failed to connect to MySQL:","error":"dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it."}
+{"level":"INFO","time":"2025-11-14T20:24:10.475+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T20:24:10.475+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-11-14T20:24:10.550+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-11-14T20:24:10.550+0800","caller":"core/server.go:21","msg":"server starting","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-11-14T20:24:22.446+0800","caller":"middleware/loggerMW.go:35","msg":"/refreshToken","status":200,"method":"GET","path":"/refreshToken","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0043311}
+{"level":"WARN","time":"2025-11-14T20:24:38.329+0800","caller":"system/articleSvc.go:40","msg":"文章标题已存在","title":"Go 并发模型解析1"}
+{"level":"ERROR","time":"2025-11-14T20:24:38.329+0800","caller":"system/articleCtrl.go:30","msg":"创建文章失败","title":"Go 并发模型解析1","error":"文章标题已存在"}
+{"level":"INFO","time":"2025-11-14T20:24:38.329+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.1980888}
+{"level":"INFO","time":"2025-11-14T20:26:39.344+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.2312364}
+{"level":"INFO","time":"2025-11-14T20:27:28.580+0800","caller":"middleware/loggerMW.go:35","msg":"/article/delete","status":200,"method":"DELETE","path":"/article/delete","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.4240121}
+{"level":"WARN","time":"2025-11-14T20:28:37.736+0800","caller":"system/articleSvc.go:40","msg":"文章标题已存在","title":"Go 并发模型解析2"}
+{"level":"ERROR","time":"2025-11-14T20:28:37.736+0800","caller":"system/articleCtrl.go:30","msg":"创建文章失败","title":"Go 并发模型解析2","error":"文章标题已存在"}
+{"level":"INFO","time":"2025-11-14T20:28:37.736+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.022541}
+{"level":"INFO","time":"2025-11-14T20:35:18.502+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T20:35:18.503+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-11-14T20:35:18.612+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-11-14T20:35:18.612+0800","caller":"core/server.go:21","msg":"server starting","address":"0.0.0.0:8080"}
+{"level":"WARN","time":"2025-11-14T20:35:51.080+0800","caller":"system/articleSvc.go:40","msg":"文章标题重复，继续创建","title":"Go 并发模型解析2"}
+{"level":"INFO","time":"2025-11-14T20:35:51.138+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0863587}
+{"level":"INFO","time":"2025-11-14T20:35:55.273+0800","caller":"middleware/loggerMW.go:35","msg":"/article/delete","status":200,"method":"DELETE","path":"/article/delete","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.1071827}
+{"level":"INFO","time":"2025-11-14T20:36:25.386+0800","caller":"middleware/loggerMW.go:35","msg":"/article/delete","status":200,"method":"DELETE","path":"/article/delete","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.06694}

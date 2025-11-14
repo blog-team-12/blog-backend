@@ -1,14 +1,16 @@
-package elasticsearch
+package elasticSearch
 
 import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/elastic/go-elasticsearch/v8/typedapi/core/bulk"
+	"personal_blog/global"
+	"personal_blog/internal/model/elasticsearch"
+
 	"github.com/elastic/go-elasticsearch/v8/typedapi/core/update"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/refresh"
-	"personal_blog/global"
-	"personal_blog/internal/model/elasticsearch"
 )
 
 /*
@@ -81,5 +83,23 @@ func Update(
 		Refresh(refresh.True).
 		Do(ctx)
 
+	return err
+}
+
+// Delete 用于删除 Elasticsearch 中的文章
+func Delete(
+	ctx context.Context,
+	ids []string,
+) error {
+	var request bulk.Request
+	// 遍历文章ID，构建批量删除请求
+	for _, id := range ids {
+		request = append(request, types.OperationContainer{Delete: &types.DeleteOperation{Id_: &id}})
+	}
+	// 执行批量删除请求，并设置刷新操作为 true
+	_, err := global.ESClient.Bulk(). // 创建批量操作，用于一次性执行多个索引、更新、删除操作
+						Request(&request).
+						Index(elasticsearch.ArticleIndex()).
+						Refresh(refresh.True).Do(ctx)
 	return err
 }
