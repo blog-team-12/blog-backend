@@ -9,6 +9,7 @@ type RepositorySupplier struct {
     menuRepository interfaces.MenuRepository
     apiRepository  interfaces.APIRepository
     imageRepository interfaces.ImageRepository
+    articleRepository interfaces.ArticleRepository
 }
 
 func (r *RepositorySupplier) GetUserRepository() interfaces.UserRepository {
@@ -33,4 +34,8 @@ func (r *RepositorySupplier) GetAPIRepository() interfaces.APIRepository {
 
 func (r *RepositorySupplier) GetImageRepository() interfaces.ImageRepository {
     return r.imageRepository
+}
+
+func (r *RepositorySupplier) GetArticleRepository() interfaces.ArticleRepository {
+    return r.articleRepository
 }

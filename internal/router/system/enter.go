@@ -1,8 +1,9 @@
 package system
 
 type RouterGroup struct {
-    RefreshTokenRouter
-    BaseRouter
-    UserRouter
-    ImageRouter
+	RefreshTokenRouter
+	BaseRouter
+	UserRouter
+	ImageRouter
+	ArticleRouter
 }

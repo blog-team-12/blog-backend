@@ -60,8 +60,9 @@ func InitRouter() *gin.Engine {
 	{
 		// 图片管理
 		systemRouter.InitImageRouter(BusinessGroup)
-
+		systemRouter.InitArticleRouter(BusinessGroup)
 		// 博客相关路由
+
 	}
 	return Router
 }

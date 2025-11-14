@@ -87,6 +87,12 @@ func Run(c *cli.Context) {
 			err := errors.New(combinedErrors)
 			global.Log.Error("Failed to import SQL data:", zap.Error(err))
 		}
+	case c.Bool(esFlag.Name):
+		if err := Elasticsearch(); err != nil {
+			global.Log.Error("Failed to create ES indices:", zap.Error(err))
+		} else {
+			global.Log.Info("Successfully created ES indices")
+		}
 	default:
 		err := cli.NewExitError("unknown command", 1)
 		global.Log.Error(err.Error(), zap.Error(err))
@@ -104,6 +110,10 @@ func NewApp() *cli.App {
 		sqlFlag,       // --sql
 		sqlExportFlag, // --sql-export
 		sqlImportFlag, // --sql-import
+		esFlag,        // --es
+		esExportFlag,  // --es-export
+		esImportFlag,  // --es-import
+		adminFlag,     // --admin
 	}
 	app.Action = Run
 	return app

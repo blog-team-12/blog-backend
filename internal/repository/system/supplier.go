@@ -14,6 +14,7 @@ type Supplier interface {
     GetMenuRepository() interfaces.MenuRepository
     GetAPIRepository() interfaces.APIRepository
     GetImageRepository() interfaces.ImageRepository
+    GetArticleRepository() interfaces.ArticleRepository
 }
 
 // SetUp 工厂函数，统一管理 - 现在支持配置驱动
@@ -24,6 +25,7 @@ func SetUp(factoryConfig *adapter.FactoryConfig) Supplier {
     var menuRepo interfaces.MenuRepository
     var apiRepo interfaces.APIRepository
     var imageRepo interfaces.ImageRepository
+    var articleRepo interfaces.ArticleRepository
 
 	switch factoryConfig.DatabaseType {
 	case adapter.MySQL:
@@ -34,6 +36,7 @@ func SetUp(factoryConfig *adapter.FactoryConfig) Supplier {
             menuRepo = NewMenuRepository(db)
             apiRepo = NewAPIRepository(db)
             imageRepo = NewImageRepository(db)
+            articleRepo = NewArticleRepository(db)
         }
 	case adapter.MongoDB:
 		// 未来可以添加Mongo	DB实现
@@ -50,6 +53,7 @@ func SetUp(factoryConfig *adapter.FactoryConfig) Supplier {
             menuRepo = NewMenuRepository(db)
             apiRepo = NewAPIRepository(db)
             imageRepo = NewImageRepository(db)
+            articleRepo = NewArticleRepository(db)
         }
     }
     return &RepositorySupplier{
@@ -59,5 +63,6 @@ func SetUp(factoryConfig *adapter.FactoryConfig) Supplier {
         menuRepository: menuRepo,
         apiRepository:  apiRepo,
         imageRepository: imageRepo,
+        articleRepository: articleRepo,
     }
 }

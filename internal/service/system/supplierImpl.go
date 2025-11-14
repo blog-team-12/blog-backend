@@ -2,30 +2,31 @@ package system
 
 // supplier implementation 用于底层实现
 type serviceSupplier struct {
-    esService         *EsService
-    jwtService        *JWTService
-    permissionService *PermissionService
-    baseService       *BaseService
-    userService       *UserService
-    imageService      *ImageService
+	jwtService        *JWTService
+	permissionService *PermissionService
+	baseService       *BaseService
+	userService       *UserService
+	imageService      *ImageService
+	articleSvc        *ArticleSvc
 }
 
-func (s *serviceSupplier) GetEsService() *EsService {
-	return s.esService
-}
-func (s *serviceSupplier) GetJWTService() *JWTService {
+func (s *serviceSupplier) GetJWTSvc() *JWTService {
 	return s.jwtService
 }
-func (s *serviceSupplier) GetPermissionService() *PermissionService {
+func (s *serviceSupplier) GetPermissionSvc() *PermissionService {
 	return s.permissionService
 }
-func (s *serviceSupplier) GetBaseService() *BaseService {
+func (s *serviceSupplier) GetBaseSvc() *BaseService {
 	return s.baseService
 }
-func (s *serviceSupplier) GetUserService() *UserService {
-    return s.userService
+func (s *serviceSupplier) GetUserSvc() *UserService {
+	return s.userService
 }
 
-func (s *serviceSupplier) GetImageService() *ImageService {
-    return s.imageService
+func (s *serviceSupplier) GetImageSvc() *ImageService {
+	return s.imageService
+}
+
+func (s *serviceSupplier) GetArticleSvc() *ArticleSvc {
+	return s.articleSvc
 }

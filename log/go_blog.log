@@ -808,3 +808,52 @@
 {"level":"INFO","time":"2025-11-12T11:19:23.625+0800","caller":"middleware/loggerMW.go:35","msg":"/image/list","status":200,"method":"GET","path":"/image/list","query":"page&page_size","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0}
 {"level":"INFO","time":"2025-11-12T11:19:50.535+0800","caller":"middleware/loggerMW.go:35","msg":"/image/list","status":200,"method":"GET","path":"/image/list","query":"page&page_size","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0225811}
 {"level":"INFO","time":"2025-11-12T11:26:58.451+0800","caller":"middleware/loggerMW.go:35","msg":"/image/1","status":200,"method":"DELETE","path":"/image/1","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.3487072}
+{"level":"INFO","time":"2025-11-14T14:54:40.074+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T14:54:40.075+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-11-14T14:54:40.141+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-11-14T14:54:40.141+0800","caller":"core/server.go:21","msg":"server starting","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-11-14T15:04:13.703+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"ERROR","time":"2025-11-14T15:04:14.063+0800","caller":"flag/enter.go:70","msg":"Failed to create table structure:","error":"failed to parse field: Tags, error: unsupported data type: &[]"}
+{"level":"INFO","time":"2025-11-14T15:07:27.140+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T15:07:27.532+0800","caller":"flag/enter.go:73","msg":"Successfully created table structure"}
+{"level":"ERROR","time":"2025-11-14T15:08:16.756+0800","caller":"response/api_helper.go:49","msg":"[Api]RefreshToken failed","message":"token is blacklist","code":4010}
+{"level":"INFO","time":"2025-11-14T15:08:16.765+0800","caller":"middleware/loggerMW.go:35","msg":"/refreshToken","status":200,"method":"GET","path":"/refreshToken","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0095609}
+{"level":"ERROR","time":"2025-11-14T15:08:29.651+0800","caller":"system/userCtrl.go:102","msg":"验证码校验失败","email":"w13839575053@qq.com","captchaID":"K8CQYdfHqKbeBnc0ZJYZ"}
+{"level":"INFO","time":"2025-11-14T15:08:29.651+0800","caller":"middleware/loggerMW.go:35","msg":"/user/login","status":200,"method":"POST","path":"/user/login","query":"flag=email","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0130478}
+{"level":"INFO","time":"2025-11-14T15:08:37.609+0800","caller":"middleware/loggerMW.go:35","msg":"/base/captcha","status":200,"method":"POST","path":"/base/captcha","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0487426}
+{"level":"INFO","time":"2025-11-14T15:09:26.591+0800","caller":"middleware/loggerMW.go:35","msg":"/user/login","status":200,"method":"POST","path":"/user/login","query":"flag=email","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.1785911}
+{"level":"INFO","time":"2025-11-14T15:09:43.748+0800","caller":"middleware/loggerMW.go:35","msg":"/refreshToken","status":200,"method":"GET","path":"/refreshToken","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0110539}
+{"level":"WARN","time":"2025-11-14T15:10:49.319+0800","caller":"system/articleSvc.go:33","msg":"检查标题是否存在出错","title":"Go 并发模型解析","error":"status: 404, failed: [index_not_found_exception], reason: no such index [article_index]"}
+{"level":"ERROR","time":"2025-11-14T15:10:49.320+0800","caller":"system/articleCtrl.go:29","msg":"创建文章失败","title":"Go 并发模型解析","error":"检查标题失败: status: 404, failed: [index_not_found_exception], reason: no such index [article_index]"}
+{"level":"INFO","time":"2025-11-14T15:10:49.320+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0595028}
+{"level":"INFO","time":"2025-11-14T15:11:14.246+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T15:11:14.247+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-11-14T15:11:14.332+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-11-14T15:11:14.332+0800","caller":"core/server.go:21","msg":"server starting","address":"0.0.0.0:8080"}
+{"level":"WARN","time":"2025-11-14T15:11:16.547+0800","caller":"system/articleSvc.go:33","msg":"检查标题是否存在出错","title":"Go 并发模型解析","error":"status: 404, failed: [index_not_found_exception], reason: no such index [article_index]"}
+{"level":"ERROR","time":"2025-11-14T15:11:16.547+0800","caller":"system/articleCtrl.go:29","msg":"创建文章失败","title":"Go 并发模型解析","error":"检查标题失败: status: 404, failed: [index_not_found_exception], reason: no such index [article_index]"}
+{"level":"INFO","time":"2025-11-14T15:11:16.547+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0170613}
+{"level":"INFO","time":"2025-11-14T15:20:57.763+0800","caller":"init/init.go:45","msg":"已创建文章索引","index":"article_index"}
+{"level":"INFO","time":"2025-11-14T15:20:57.774+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T15:32:59.759+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T15:32:59.760+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-11-14T15:32:59.854+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-11-14T15:32:59.854+0800","caller":"core/server.go:21","msg":"server starting","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-11-14T15:38:34.725+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T15:38:34.726+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-11-14T15:38:34.811+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-11-14T15:38:34.812+0800","caller":"core/server.go:21","msg":"server starting","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-11-14T15:39:09.505+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T15:39:44.893+0800","caller":"core/casbin.go:46","msg":"Casbin 初始化成功"}
+{"level":"INFO","time":"2025-11-14T15:39:44.894+0800","caller":"core/corn.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-11-14T15:39:44.983+0800","caller":"system/permissionSvc.go:52","msg":"权限同步完成"}
+{"level":"INFO","time":"2025-11-14T15:39:44.984+0800","caller":"core/server.go:21","msg":"server starting","address":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-11-14T15:39:52.687+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0005042}
+{"level":"INFO","time":"2025-11-14T15:39:57.947+0800","caller":"middleware/loggerMW.go:35","msg":"/refreshToken","status":200,"method":"GET","path":"/refreshToken","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0310567}
+{"level":"INFO","time":"2025-11-14T15:40:08.572+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.4397024}
+{"level":"WARN","time":"2025-11-14T15:40:29.651+0800","caller":"system/articleSvc.go:37","msg":"文章标题已存在","title":"Go 并发模型解析"}
+{"level":"ERROR","time":"2025-11-14T15:40:29.651+0800","caller":"system/articleCtrl.go:29","msg":"创建文章失败","title":"Go 并发模型解析","error":"文章标题已存在"}
+{"level":"INFO","time":"2025-11-14T15:40:29.652+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0135207}
+{"level":"INFO","time":"2025-11-14T15:40:48.815+0800","caller":"middleware/loggerMW.go:35","msg":"/article/create","status":200,"method":"POST","path":"/article/create","query":"","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0.0673474}
+{"level":"INFO","time":"2025-11-14T15:42:44.697+0800","caller":"middleware/loggerMW.go:35","msg":"/article/delete","status":404,"method":"DELETE","path":"/article/delete","query":"ids=Yc1PgZoBqLjRJf09S7ML","ip":"::1","user-agent":"Apifox/1.0.0 (https://apifox.com)","errors":"","cost":0}
+{"level":"ERROR","time":"2025-11-14T20:09:42.454+0800","caller":"flag/enter.go:92","msg":"Failed to create ES indices:","error":"an error happened during the Exists query execution: dial tcp 127.0.0.1:9200: connectex: No connection could be made because the target machine actively refused it."}

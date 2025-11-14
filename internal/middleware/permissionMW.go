@@ -3,13 +3,14 @@ package middleware
 import (
 	"context"
 	"errors"
-	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
 	"personal_blog/global"
 	"personal_blog/internal/model/dto/request"
 	"personal_blog/internal/service"
 	"personal_blog/pkg/response"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 )
 
 // PermissionMiddleware 权限验证中间件
@@ -138,7 +139,7 @@ func (a *permissionAuth) extractUserInfo() bool {
 
 // loadUserRoles 加载用户角色信息
 func (a *permissionAuth) loadUserRoles() bool {
-	permissionService := a.serviceGroup.SystemServiceSupplier.GetPermissionService()
+	permissionService := a.serviceGroup.SystemServiceSupplier.GetPermissionSvc()
 
 	// 获取用户角色列表
 	roles, err := permissionService.GetUserRoles(a.ctx, a.userID)
@@ -186,7 +187,7 @@ func (a *permissionAuth) checkSuperUser() bool {
 
 // checkAPIPermission 检查API权限
 func (a *permissionAuth) checkAPIPermission() bool {
-	permissionService := a.serviceGroup.SystemServiceSupplier.GetPermissionService()
+	permissionService := a.serviceGroup.SystemServiceSupplier.GetPermissionSvc()
 
 	// 使用FullPath获取路由模板
 	apiPath := a.c.FullPath()
